@@ -203,6 +203,7 @@ void ui_process(uint16_t framenumber)
 		return;
 	}
 
+
 	/* Scan buttons on push button 2 (BP3) to send keys sequence */
 	b_btn_state = !ioport_get_pin_level(GPIO_PUSH_BUTTON_2);
 	if (b_btn_state != btn_last_state) {
