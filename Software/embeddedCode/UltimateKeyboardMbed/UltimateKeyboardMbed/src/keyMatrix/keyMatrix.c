@@ -74,60 +74,66 @@
 #define KEY_OUT_3_INACTIVE_LEVEL  IOPORT_PIN_LEVEL_HIGH
 
 /** KEY #4 pin definition . */
-#define KEY_OUT_4_NAME      "KEY OUT 4 D3"
-#define KEY_OUT_4       {PIO_PD3, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
-#define KEY_OUT_4_MASK  PIO_PD3
+#define KEY_OUT_4_NAME      "KEY OUT 4 D8"
+#define KEY_OUT_4       {PIO_PD8, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
+#define KEY_OUT_4_MASK  PIO_PD8
 #define KEY_OUT_4_PIO   PIOD
 #define KEY_OUT_4_ID    ID_PIOD
 #define KEY_OUT_4_TYPE  PIO_OUTPUT_1
 #define KEY_OUT_4_ATTR  PIO_DEFAULT
 
-#define KEY_OUT_4_GPIO            (PIO_PD3_IDX)
+#define KEY_OUT_4_GPIO            (PIO_PD8_IDX)
 #define KEY_OUT_4_FLAGS           (0)
 #define KEY_OUT_4_ACTIVE_LEVEL    IOPORT_PIN_LEVEL_LOW
 #define KEY_OUT_4_INACTIVE_LEVEL  IOPORT_PIN_LEVEL_HIGH
 
 /** KEY #5 pin definition . */
-#define KEY_OUT_5_NAME      "KEY OUT 5 D3"
-#define KEY_OUT_5       {PIO_PD3, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
-#define KEY_OUT_5_MASK  PIO_PD3
+#define KEY_OUT_5_NAME      "KEY OUT 5 D9"
+#define KEY_OUT_5       {PIO_PD9, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
+#define KEY_OUT_5_MASK  PIO_PD9
 #define KEY_OUT_5_PIO   PIOD
 #define KEY_OUT_5_ID    ID_PIOD
 #define KEY_OUT_5_TYPE  PIO_OUTPUT_1
 #define KEY_OUT_5_ATTR  PIO_DEFAULT
 
-#define KEY_OUT_5_GPIO            (PIO_PD3_IDX)
+#define KEY_OUT_5_GPIO            (PIO_PD9_IDX)
 #define KEY_OUT_5_FLAGS           (0)
 #define KEY_OUT_5_ACTIVE_LEVEL    IOPORT_PIN_LEVEL_LOW
 #define KEY_OUT_5_INACTIVE_LEVEL  IOPORT_PIN_LEVEL_HIGH
 
 /** KEY #6 pin definition . */
-#define KEY_OUT_6_NAME      "KEY OUT 6 D3"
-#define KEY_OUT_6       {PIO_PD3, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
-#define KEY_OUT_6_MASK  PIO_PD3
+#define KEY_OUT_6_NAME      "KEY OUT 6 D15"
+#define KEY_OUT_6       {PIO_PD15, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
+#define KEY_OUT_6_MASK  PIO_PD15
 #define KEY_OUT_6_PIO   PIOD
 #define KEY_OUT_6_ID    ID_PIOD
 #define KEY_OUT_6_TYPE  PIO_OUTPUT_1
 #define KEY_OUT_6_ATTR  PIO_DEFAULT
 
-#define KEY_OUT_6_GPIO            (PIO_PD3_IDX)
+#define KEY_OUT_6_GPIO            (PIO_PD15_IDX)
 #define KEY_OUT_6_FLAGS           (0)
 #define KEY_OUT_6_ACTIVE_LEVEL    IOPORT_PIN_LEVEL_LOW
 #define KEY_OUT_6_INACTIVE_LEVEL  IOPORT_PIN_LEVEL_HIGH
 
 /** KEY #7 pin definition . */
-#define KEY_OUT_7_NAME      "KEY OUT 7 D3"
-#define KEY_OUT_7       {PIO_PD3, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
-#define KEY_OUT_7_MASK  PIO_PD3
+#define KEY_OUT_7_NAME      "KEY OUT 7 D10"
+#define KEY_OUT_7       {PIO_PD10, PIOD, ID_PIOD, PIO_OUTPUT_1, PIO_DEFAULT}
+#define KEY_OUT_7_MASK  PIO_PD10
 #define KEY_OUT_7_PIO   PIOD
 #define KEY_OUT_7_ID    ID_PIOD
 #define KEY_OUT_7_TYPE  PIO_OUTPUT_1
 #define KEY_OUT_7_ATTR  PIO_DEFAULT
 
-#define KEY_OUT_7_GPIO            (PIO_PD3_IDX)
+#define KEY_OUT_7_GPIO            (PIO_PD10_IDX)
 #define KEY_OUT_7_FLAGS           (0)
 #define KEY_OUT_7_ACTIVE_LEVEL    IOPORT_PIN_LEVEL_LOW
 #define KEY_OUT_7_INACTIVE_LEVEL  IOPORT_PIN_LEVEL_HIGH
+
+//Macro to set the pin output
+//example of use
+//KEY_OUT_ON(
+#define KEY_OUT_ON(key)      ioport_set_pin_level(KEY_OUT_##_GPIO, led_##_ACTIVE_LEVEL)
+
 
 //list of input keys
 //0 PD11
@@ -138,6 +144,33 @@
 //5 PA5
 //6 PA27
 //7 PD18
+
+//we don't want an interrupt, but we want the pull-up and the debounce
+
+
+/**
+ * Push button #1 definition. Attributes = pull-up + debounce + interrupt on
+ * falling edge.
+ */
+#define KEY_IN_0_NAME        "KEY IN 0 D11"
+#define PUSHBUTTON_2_WKUP_LINE   (10)
+#define PUSHBUTTON_2_WKUP_FSTT   (PMC_FSMR_FSTT10)
+#define GPIO_PUSH_BUTTON_2       (PIO_PA20_IDX)
+#define GPIO_PUSH_BUTTON_2_FLAGS (IOPORT_MODE_PULLUP | IOPORT_MODE_DEBOUNCE)
+#define GPIO_PUSH_BUTTON_2_SENSE (IOPORT_SENSE_FALLING)
+
+#define PIN_PUSHBUTTON_2       {PIO_PA20, PIOA, ID_PIOA, PIO_INPUT, \
+		PIO_PULLUP | PIO_DEBOUNCE | PIO_IT_FALL_EDGE}
+#define PIN_PUSHBUTTON_2_MASK  PIO_PA20
+#define PIN_PUSHBUTTON_2_PIO   PIOA
+#define PIN_PUSHBUTTON_2_ID    ID_PIOA
+#define PIN_PUSHBUTTON_2_TYPE  PIO_INPUT
+#define PIN_PUSHBUTTON_2_ATTR  (PIO_PULLUP | PIO_DEBOUNCE | PIO_IT_FALL_EDGE)
+#define PIN_PUSHBUTTON_2_IRQn  PIOA_IRQn
+
+
+
+
 
 
 static void checkPins(void);

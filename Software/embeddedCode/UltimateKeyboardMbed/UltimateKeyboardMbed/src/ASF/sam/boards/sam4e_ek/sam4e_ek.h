@@ -748,8 +748,7 @@
 #define ISO7816_USART_ID           ID_USART1
 #define ISO7816_USART              USART1
 #define PIN_ISO7816_RST_IDX        PIO_PA15_IDX
-#define PIN_ISO7816_RST_FLAG       (0)
-
+#define PIN_ISO7816_RST_FLAG       (0
 /*----------------------------------------------------------------------------*/
 /* GMAC HW configurations */
 #define BOARD_GMAC_PHY_ADDR 0
