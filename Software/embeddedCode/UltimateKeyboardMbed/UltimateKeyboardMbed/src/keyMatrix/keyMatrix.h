@@ -11,12 +11,14 @@
 #ifndef KEYMATRIX_H_
 #define KEYMATRIX_H_
 
+
 //a single key will need the following
 typedef struct ukey//ukey is for the ultimate key
 {
 	uint8_t id;//the keyNumber
-	uint8_t isValid;
-	uint8_t keyIsDown;//this is the temp to check if it has been press for 2 checks.	
+	uint8_t keyState;//1(true) if key is being pressed, false(0) if not pressed
+	uint8_t checkCount;//this is how long it has been pressed for.
+	uint8_t keySent;//this is the temp to check if it has been press for 2 checks.	
 } UKEY;
 
 
