@@ -8,6 +8,7 @@
 
 #include <asf.h>
 #include "keyMatrix.h"
+#include <string.h>
 //List of output Keys
 //0 PD3
 //1 PD5
@@ -342,18 +343,66 @@ PIO_PULLUP | PIO_DEBOUNCE }
 static ioport_pin_t keyInArray[8] = {KEY_IN_0, KEY_IN_1, KEY_IN_2, KEY_IN_3,  
 	KEY_IN_4, KEY_IN_5, KEY_IN_6, KEY_IN_7};
 
+// this is an array of all the available keys.
 static UKEY buttonPressArray[8][8];
+
+//this is an array of currently pressed keys
+static UKEY currentlyPressedKeys[7];
+
 static void checkPins(void);
 
 static void setOuputPin(uint8_t outputKeyIndex);
 void initializeKeys(void)
 {
+	uint8_t i = 0;
+	uint8_t j = 0;
+	
 	//set up the keys to work 1 by 1
 	//since each key has a unique number we will arrange them individually.
 	// this is in colomn row order
-	//[
+	//[outputs][inputs]
+	for(i = 0; i < 8; i++)
+	{
+		for(j = 0; j < 8; j++)
+		{
+			buttonPressArray[i][j].id = 0;//initializes all of the keys to default
+		}
+	}
+	
+	//first row of inputs
 	buttonPressArray[0][0].id = 1;
-	buttonPressArray[0][0].id = 1;
+	buttonPressArray[0][1].id = 2;
+	buttonPressArray[0][2].id = 3;
+	buttonPressArray[0][3].id = 4;
+	buttonPressArray[0][4].id = 20;
+	buttonPressArray[0][5].id = 21;
+	buttonPressArray[0][6].id = 22;
+	buttonPressArray[0][7].id = 23;
+	
+	//Second Row of inputs
+	buttonPressArray[1][0].id = 5;
+	buttonPressArray[1][1].id = 6;
+	buttonPressArray[1][2].id = 7;
+	buttonPressArray[1][3].id = 8;
+	buttonPressArray[1][4].id = 9;
+	buttonPressArray[1][6].id = 24;
+	buttonPressArray[1][7].id = 25;
+	
+	//Third Row of inputs
+	buttonPressArray[2][0].id = 10;
+	buttonPressArray[2][1].id = 11;
+	buttonPressArray[2][2].id = 12;
+	buttonPressArray[2][3].id = 13;
+	buttonPressArray[2][4].id = 14;
+	buttonPressArray[2][6].id = 26;
+	buttonPressArray[2][7].id = 27;
+	
+	//Fourth Row of inputs
+	buttonPressArray[3][0].id = 15;
+	buttonPressArray[3][1].id = 16;
+	buttonPressArray[3][2].id = 17;
+	buttonPressArray[3][3].id = 18;
+	buttonPressArray[3][4].id = 19;
 }
 
 static void checkPins(void)
@@ -377,12 +426,34 @@ static void checkPins(void)
 			if(buttonPressArray[outputIndex][inputsIndex].keyState)
 			{
 				buttonPressArray[outputIndex][inputsIndex].checkCount++;
+				//just pressed
+				if(buttonPressArray[outputIndex][inputsIndex].checkCount == 1)
+				{
+					buttonPressArray[outputIndex][inputsIndex].pressState = KEY_PRESSED;
+					
+				}
+				else if(buttonPressArray[outputIndex][inputsIndex].checkCount > 1)
+				{
+					buttonPressArray[outputIndex][inputsIndex].pressState = KEY_HELD;
+					
+				}
+				
 				
 			}
 			else
 			{
+				//Key is released
+				if(buttonPressArray[outputIndex][inputsIndex].checkCount != 0)
+				{
+					buttonPressArray[outputIndex][inputsIndex].pressState = KEY_RELEASED;
+					buttonPressArray[outputIndex][inputsIndex].checkCount = 0;
+				}
+				else
+				{			
+					//don't do anything with the key
+					buttonPressArray[outputIndex][inputsIndex].pressState = NO_KEY_STATE;
+				}
 				
-				buttonPressArray[outputIndex][inputsIndex].checkCount = 0;
 			}
 		}	
 	}
@@ -433,6 +504,38 @@ static void setOuputPin(uint8_t outputKeyIndex)
 		break;
 		default:
 		break;
+	}
+	
+}
+
+//up to 10 keys at one time
+void getActiveKeys(UKEY *selectedKeys, uint8_t *size)
+{
+	uint8_t i = 0;
+	uint8_t j = 0;
+	uint8_t keyIndex = 0;
+	
+	//this will be call regularly
+	checkPins();
+	selectedKeys = currentlyPressedKeys;
+	for(i = 0; i < 8; i++)
+	{
+		for(j = 0; j < 8; j++)
+		{
+			//key if the key has changed states, if so load the key into the system.
+			if(buttonPressArray[i][j].keyState !=  NO_KEY_STATE)
+			{
+				memcpy(&currentlyPressedKeys[keyIndex],&buttonPressArray[i][j], sizeof(UKEY));
+				keyIndex++;
+				*size = keyIndex;
+			}
+			
+			//no more room for any more keys
+			if(keyIndex==7)
+			{
+				return;
+			}	
+		}
 	}
 	
 }
