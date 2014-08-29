@@ -346,7 +346,15 @@ static UKEY buttonPressArray[8][8];
 static void checkPins(void);
 
 static void setOuputPin(uint8_t outputKeyIndex);
-
+void initializeKeys(void)
+{
+	//set up the keys to work 1 by 1
+	//since each key has a unique number we will arrange them individually.
+	// this is in colomn row order
+	//[
+	buttonPressArray[0][0].id = 1;
+	buttonPressArray[0][0].id = 1;
+}
 
 static void checkPins(void)
 {
@@ -427,6 +435,4 @@ static void setOuputPin(uint8_t outputKeyIndex)
 		break;
 	}
 	
-	
-
 }
