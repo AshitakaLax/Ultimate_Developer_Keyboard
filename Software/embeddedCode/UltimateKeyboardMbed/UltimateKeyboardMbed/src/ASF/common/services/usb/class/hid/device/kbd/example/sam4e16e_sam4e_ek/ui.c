@@ -43,6 +43,7 @@
 
 #include <asf.h>
 #include "ui.h"
+#include "keyMatrix/keyMatrix.h"
 
 /** Sequence process running each \c SEQUENCE_PERIOD ms */
 #define SEQUENCE_PERIOD 150

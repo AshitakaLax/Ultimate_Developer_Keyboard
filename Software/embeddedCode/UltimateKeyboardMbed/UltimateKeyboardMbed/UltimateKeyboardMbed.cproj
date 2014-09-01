@@ -954,6 +954,12 @@
     <Compile Include="src\ASF\sam\utils\syscalls\gcc\syscalls.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\keyMatrix\defaultKeyValues.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\keyMatrix\defaultKeyValues.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\keyMatrix\keyMatrix.c">
       <SubType>compile</SubType>
     </Compile>

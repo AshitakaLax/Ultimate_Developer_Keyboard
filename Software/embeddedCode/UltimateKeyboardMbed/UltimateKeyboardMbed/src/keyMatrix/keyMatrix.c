@@ -508,6 +508,13 @@ static void setOuputPin(uint8_t outputKeyIndex)
 	
 }
 
+
+void getKeyArray(UKEY * keys)
+{
+	keys = buttonPressArray;
+	
+}
+
 //up to 10 keys at one time
 void getActiveKeys(UKEY *selectedKeys, uint8_t *size)
 {

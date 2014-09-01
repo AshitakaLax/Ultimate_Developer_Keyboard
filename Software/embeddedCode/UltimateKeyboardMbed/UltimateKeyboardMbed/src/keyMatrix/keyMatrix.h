@@ -23,6 +23,8 @@ typedef enum
 typedef struct ukey//ukey is for the ultimate key
 {
 	uint8_t id;//the keyNumber
+	uint8_t hidKeyValue;//the hid key value(not the modifier)
+	uint8_t hidModifierValue;//the hid modifier value(cntrl, alt, shift, etc...)
 	uint8_t keyState;//1(true) if key is being pressed, false(0) if not pressed
 	uint8_t checkCount;//this is how long it has been pressed for.
 	uint8_t keySent;//this is the temp to check if it has been press for 2 checks.	
@@ -41,6 +43,6 @@ void initializeKeys(void);
 /************************************************************************/
 void getActiveKeys(UKEY *selectedKeys, uint8_t *size);
 
-
+void getKeyArray(UKEY * keys);
 
 #endif /* KEYMATRIX_H_ */
