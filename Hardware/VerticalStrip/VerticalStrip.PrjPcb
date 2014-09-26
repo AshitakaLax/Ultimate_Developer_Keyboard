@@ -2,7 +2,7 @@
 Version=1.0
 HierarchyMode=0
 ChannelRoomNamingStyle=0
-OutputPath=Project Outputs for MainBoard
+OutputPath=
 LogFolderPath=
 ChannelDesignatorFormatString=$Component_$RoomName
 ChannelRoomLevelSeperator=_
@@ -27,7 +27,7 @@ PushECOToAnnotationFile=1
 DItemRevisionGUID=
 
 [Document1]
-DocumentPath=MainBoard.SchDoc
+DocumentPath=VerticalKeyStrip.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -42,13 +42,13 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document2]
-DocumentPath=mainBoardLib.SchLib
+DocumentPath=VerticalKeyStrip.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=0
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -57,7 +57,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document3]
-DocumentPath=MainBoard.PcbDoc
+DocumentPath=..\MainBoard\libraries\Atmel Footprints.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -72,7 +72,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document4]
-DocumentPath=mainBoard.PcbLib
+DocumentPath=..\MainBoard\libraries\C.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -87,7 +87,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document5]
-DocumentPath=libraries\Atmel Footprints.PcbLib
+DocumentPath=..\MainBoard\libraries\C.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -102,7 +102,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document6]
-DocumentPath=libraries\C.PCBLIB
+DocumentPath=..\MainBoard\libraries\LD.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -117,7 +117,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document7]
-DocumentPath=libraries\C.SchLib
+DocumentPath=..\MainBoard\libraries\LD.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -132,7 +132,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document8]
-DocumentPath=libraries\LD.PCBLIB
+DocumentPath=..\MainBoard\libraries\R.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -147,7 +147,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document9]
-DocumentPath=libraries\LD.SchLib
+DocumentPath=..\MainBoard\libraries\R.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -162,7 +162,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document10]
-DocumentPath=libraries\R.PCBLIB
+DocumentPath=..\MainBoard\libraries\U.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -177,7 +177,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document11]
-DocumentPath=libraries\R.SchLib
+DocumentPath=..\MainBoard\libraries\U.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -192,7 +192,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document12]
-DocumentPath=libraries\U.PCBLIB
+DocumentPath=..\MainBoard\mainBoard.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -207,7 +207,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document13]
-DocumentPath=libraries\U.SchLib
+DocumentPath=..\MainBoard\mainBoardLib.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -222,7 +222,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document14]
-DocumentPath=Job1.OutJob
+DocumentPath=CAMtastic1.Cam
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -237,22 +237,7 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [Document15]
-DocumentPath=manufacturing files\mainBoard.cam
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-
-[Document16]
-DocumentPath=manufacturing files\mainBoardHoles.Cam
+DocumentPath=CAMtastic2.Cam
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -267,395 +252,91 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 
 [GeneratedDocument1]
-DocumentPath=odb\steps\pcb\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.DRL
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=odb\steps\pcb\layers\bottom\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=odb\steps\pcb\layers\bottomoverlay\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=odb\steps\pcb\layers\bottompaste\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=odb\steps\pcb\layers\bottomsolder\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=odb\steps\pcb\layers\drill\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=odb\steps\pcb\layers\keepout\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GD1
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=odb\steps\pcb\layers\mechanical1\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GG1
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=odb\steps\pcb\layers\mechanical2\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GKO
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=odb\steps\pcb\layers\mechanical3\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GM1
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=odb\steps\pcb\layers\mechanical4\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GM13
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=odb\steps\pcb\layers\mechanical5\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GM15
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=odb\steps\pcb\layers\mechanical6\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GPB
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=odb\steps\pcb\layers\mechanical7\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GPT
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=odb\steps\pcb\layers\mechanical8\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=odb\steps\pcb\layers\mechanical9\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=odb\steps\pcb\layers\mechanical10\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GTP
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=odb\steps\pcb\layers\mechanical11\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=odb\steps\pcb\layers\mechanical12\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument20]
-DocumentPath=odb\steps\pcb\layers\mechanical13\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.REP
 DItemRevisionGUID=
 
 [GeneratedDocument21]
-DocumentPath=odb\steps\pcb\layers\mechanical14\attrlist
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.RUL
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=odb\steps\pcb\layers\mechanical15\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument23]
-DocumentPath=odb\steps\pcb\layers\mechanical16\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument24]
-DocumentPath=odb\steps\pcb\layers\mechanical29\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument25]
-DocumentPath=odb\steps\pcb\layers\top\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument26]
-DocumentPath=odb\steps\pcb\layers\topoverlay\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument27]
-DocumentPath=odb\steps\pcb\layers\toppaste\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument28]
-DocumentPath=odb\steps\pcb\layers\topsolder\attrlist
-DItemRevisionGUID=
-
-[GeneratedDocument29]
-DocumentPath=odb\steps\pcb\layers\comp_+_bot\components
-DItemRevisionGUID=
-
-[GeneratedDocument30]
-DocumentPath=odb\steps\pcb\layers\comp_+_top\components
-DItemRevisionGUID=
-
-[GeneratedDocument31]
-DocumentPath=odb\steps\pcb\eda\data
-DItemRevisionGUID=
-
-[GeneratedDocument32]
-DocumentPath=Project Outputs for MainBoard\Design Rule Check - MainBoard.html
-DItemRevisionGUID=
-
-[GeneratedDocument33]
-DocumentPath=odb\steps\pcb\layers\bottom\features
-DItemRevisionGUID=
-
-[GeneratedDocument34]
-DocumentPath=odb\steps\pcb\layers\bottomoverlay\features
-DItemRevisionGUID=
-
-[GeneratedDocument35]
-DocumentPath=odb\steps\pcb\layers\bottompaste\features
-DItemRevisionGUID=
-
-[GeneratedDocument36]
-DocumentPath=odb\steps\pcb\layers\bottomsolder\features
-DItemRevisionGUID=
-
-[GeneratedDocument37]
-DocumentPath=odb\steps\pcb\layers\comp_+_bot\features
-DItemRevisionGUID=
-
-[GeneratedDocument38]
-DocumentPath=odb\steps\pcb\layers\comp_+_top\features
-DItemRevisionGUID=
-
-[GeneratedDocument39]
-DocumentPath=odb\steps\pcb\layers\drill\features
-DItemRevisionGUID=
-
-[GeneratedDocument40]
-DocumentPath=odb\steps\pcb\layers\keepout\features
-DItemRevisionGUID=
-
-[GeneratedDocument41]
-DocumentPath=odb\steps\pcb\layers\mechanical1\features
-DItemRevisionGUID=
-
-[GeneratedDocument42]
-DocumentPath=odb\steps\pcb\layers\mechanical2\features
-DItemRevisionGUID=
-
-[GeneratedDocument43]
-DocumentPath=odb\steps\pcb\layers\mechanical3\features
-DItemRevisionGUID=
-
-[GeneratedDocument44]
-DocumentPath=odb\steps\pcb\layers\mechanical4\features
-DItemRevisionGUID=
-
-[GeneratedDocument45]
-DocumentPath=odb\steps\pcb\layers\mechanical5\features
-DItemRevisionGUID=
-
-[GeneratedDocument46]
-DocumentPath=odb\steps\pcb\layers\mechanical6\features
-DItemRevisionGUID=
-
-[GeneratedDocument47]
-DocumentPath=odb\steps\pcb\layers\mechanical7\features
-DItemRevisionGUID=
-
-[GeneratedDocument48]
-DocumentPath=odb\steps\pcb\layers\mechanical8\features
-DItemRevisionGUID=
-
-[GeneratedDocument49]
-DocumentPath=odb\steps\pcb\layers\mechanical9\features
-DItemRevisionGUID=
-
-[GeneratedDocument50]
-DocumentPath=odb\steps\pcb\layers\mechanical10\features
-DItemRevisionGUID=
-
-[GeneratedDocument51]
-DocumentPath=odb\steps\pcb\layers\mechanical11\features
-DItemRevisionGUID=
-
-[GeneratedDocument52]
-DocumentPath=odb\steps\pcb\layers\mechanical12\features
-DItemRevisionGUID=
-
-[GeneratedDocument53]
-DocumentPath=odb\steps\pcb\layers\mechanical13\features
-DItemRevisionGUID=
-
-[GeneratedDocument54]
-DocumentPath=odb\steps\pcb\layers\mechanical14\features
-DItemRevisionGUID=
-
-[GeneratedDocument55]
-DocumentPath=odb\steps\pcb\layers\mechanical15\features
-DItemRevisionGUID=
-
-[GeneratedDocument56]
-DocumentPath=odb\steps\pcb\layers\mechanical16\features
-DItemRevisionGUID=
-
-[GeneratedDocument57]
-DocumentPath=odb\steps\pcb\layers\mechanical29\features
-DItemRevisionGUID=
-
-[GeneratedDocument58]
-DocumentPath=odb\steps\pcb\layers\top\features
-DItemRevisionGUID=
-
-[GeneratedDocument59]
-DocumentPath=odb\steps\pcb\layers\topoverlay\features
-DItemRevisionGUID=
-
-[GeneratedDocument60]
-DocumentPath=odb\steps\pcb\layers\toppaste\features
-DItemRevisionGUID=
-
-[GeneratedDocument61]
-DocumentPath=odb\steps\pcb\layers\topsolder\features
-DItemRevisionGUID=
-
-[GeneratedDocument62]
-DocumentPath=MainBoard-RoundHoles.TXT
-DItemRevisionGUID=
-
-[GeneratedDocument63]
-DocumentPath=Project Outputs for MainBoard\MainBoard-RoundHoles.TXT
-DItemRevisionGUID=
-
-[GeneratedDocument64]
-DocumentPath=MainBoard-SquareHoles.TXT
-DItemRevisionGUID=
-
-[GeneratedDocument65]
-DocumentPath=Project Outputs for MainBoard\MainBoard-SquareHoles.TXT
-DItemRevisionGUID=
-
-[GeneratedDocument66]
-DocumentPath=MainBoard.DRL
-DItemRevisionGUID=
-
-[GeneratedDocument67]
-DocumentPath=Project Outputs for MainBoard\MainBoard.DRL
-DItemRevisionGUID=
-
-[GeneratedDocument68]
-DocumentPath=MainBoard.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument69]
-DocumentPath=Project Outputs for MainBoard\MainBoard.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument70]
-DocumentPath=MainBoard.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument71]
-DocumentPath=Project Outputs for MainBoard\MainBoard.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument72]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument73]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument74]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument75]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument76]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument77]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM2
-DItemRevisionGUID=
-
-[GeneratedDocument78]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM13
-DItemRevisionGUID=
-
-[GeneratedDocument79]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM15
-DItemRevisionGUID=
-
-[GeneratedDocument80]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM16
-DItemRevisionGUID=
-
-[GeneratedDocument81]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GM29
-DItemRevisionGUID=
-
-[GeneratedDocument82]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument83]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument84]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument85]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument86]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GTP
-DItemRevisionGUID=
-
-[GeneratedDocument87]
-DocumentPath=Project Outputs for MainBoard\MainBoard.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument88]
-DocumentPath=MainBoard.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument89]
-DocumentPath=Project Outputs for MainBoard\MainBoard.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument90]
-DocumentPath=MainBoard.REP
-DItemRevisionGUID=
-
-[GeneratedDocument91]
-DocumentPath=Project Outputs for MainBoard\MainBoard.REP
-DItemRevisionGUID=
-
-[GeneratedDocument92]
-DocumentPath=MainBoard.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument93]
-DocumentPath=Project Outputs for MainBoard\MainBoard.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument94]
-DocumentPath=odb\matrix\matrix
-DItemRevisionGUID=
-
-[GeneratedDocument95]
-DocumentPath=odb\steps\pcb\netlists\cadnet\netlist
-DItemRevisionGUID=
-
-[GeneratedDocument96]
-DocumentPath=odb\steps\pcb\profile
-DItemRevisionGUID=
-
-[GeneratedDocument97]
-DocumentPath=odb\steps\pcb\stephdr
-DItemRevisionGUID=
-
-[GeneratedDocument98]
-DocumentPath=odb\steps\pcb\layers\drill\tools
+DocumentPath=Project Outputs for VerticalStrip\VerticalKeyStrip.TXT
 DItemRevisionGUID=
 
 [OutputGroup1]
@@ -897,60 +578,60 @@ Name=Fabrication Outputs
 Description=
 TargetPrinter=\\PRINTSRV\treaddell
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
-OutputType1=ODB
-OutputName1=ODB++ Files
+OutputType1=Drill
+OutputName1=Drill Drawing/Guides
 OutputDocumentPath1=
 OutputVariantName1=
 OutputDefault1=0
-OutputType2=NC Drill
-OutputName2=NC Drill Files
+PageOptions1=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
+OutputType2=Mask
+OutputName2=Solder/Paste Mask Prints
 OutputDocumentPath2=
 OutputVariantName2=
 OutputDefault2=0
-Configuration2_Name1=OutputConfigurationParameter1
-Configuration2_Item1=BoardEdgeRoutToolDia=2000000|GenerateBoardEdgeRout=False|GenerateDrilledSlotsG85=False|GenerateSeparatePlatedNonPlatedFiles=False|NumberOfDecimals=5|NumberOfUnits=2|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Record=DrillView|Units=Imperial|ZeroesMode=SuppressTrailingZeroes
-OutputType3=Test Points
-OutputName3=Test Point Report
+PageOptions2=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
+OutputType3=Final
+OutputName3=Final Artwork Prints
 OutputDocumentPath3=
 OutputVariantName3=
 OutputDefault3=0
-OutputType4=Plane
-OutputName4=Power-Plane Prints
+PageOptions3=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
+OutputType4=CompositeDrill
+OutputName4=Composite Drill Drawing
 OutputDocumentPath4=
 OutputVariantName4=
 OutputDefault4=0
 PageOptions4=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
-OutputType5=Mask
-OutputName5=Solder/Paste Mask Prints
+OutputType5=NC Drill
+OutputName5=NC Drill Files
 OutputDocumentPath5=
 OutputVariantName5=
 OutputDefault5=0
-PageOptions5=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
-OutputType6=Drill
-OutputName6=Drill Drawing/Guides
+Configuration5_Name1=OutputConfigurationParameter1
+Configuration5_Item1=BoardEdgeRoutToolDia=2000000|GenerateBoardEdgeRout=False|GenerateDrilledSlotsG85=False|GenerateSeparatePlatedNonPlatedFiles=False|NumberOfDecimals=5|NumberOfUnits=2|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Record=DrillView|Units=Imperial|ZeroesMode=SuppressTrailingZeroes
+OutputType6=ODB
+OutputName6=ODB++ Files
 OutputDocumentPath6=
 OutputVariantName6=
 OutputDefault6=0
-PageOptions6=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
-OutputType7=CompositeDrill
-OutputName7=Composite Drill Drawing
+OutputType7=Plane
+OutputName7=Power-Plane Prints
 OutputDocumentPath7=
 OutputVariantName7=
 OutputDefault7=0
 PageOptions7=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
-OutputType8=Final
-OutputName8=Final Artwork Prints
+OutputType8=Test Points
+OutputName8=Test Point Report
 OutputDocumentPath8=
 OutputVariantName8=
 OutputDefault8=0
-PageOptions8=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-4|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1
 OutputType9=Gerber
 OutputName9=Gerber Files
 OutputDocumentPath9=
 OutputVariantName9=
 OutputDefault9=0
 Configuration9_Name1=OutputConfigurationParameter1
-Configuration9_Item1=AddToAllPlots.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean|CentrePlots=False|DrillDrawingSymbol=GraphicsSymbol|DrillDrawingSymbolSize=500000|EmbeddedApertures=True|FilmBorderSize=10000000|FilmXSize=200000000|FilmYSize=160000000|FlashAllFills=False|FlashPadShapes=True|G54OnApertureChange=False|GenerateDRCRulesFile=True|GenerateReliefShapes=True|GerberUnit=Imperial|IncludeUnconnectedMidLayerPads=False|LeadingAndTrailingZeroesMode=SuppressLeadingZeroes|MaxApertureSize=2500000|MinusApertureTolerance=50|Mirror.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean|MirrorDrillDrawingPlots=False|MirrorDrillGuidePlots=False|NumberOfDecimals=5|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Panelize=False|Plot.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean,16973830~1,16973832~1,16973834~1,16777217~1,16842751~1,16973835~1,16973831~1,16908289~1,16908290~1,16908301~1,16908303~1,16908304~1,16908317~1,16973837~1,16973848~1,16973849~1|PlotPositivePlaneLayers=False|PlotUsedDrillDrawingLayerPairs=False|PlotUsedDrillGuideLayerPairs=False|PlusApertureTolerance=50|Record=GerberView|SoftwareArcs=False|Sorted=False
+Configuration9_Item1=AddToAllPlots.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean|CentrePlots=False|DrillDrawingSymbol=GraphicsSymbol|DrillDrawingSymbolSize=500000|EmbeddedApertures=True|FilmBorderSize=10000000|FilmXSize=200000000|FilmYSize=160000000|FlashAllFills=False|FlashPadShapes=True|G54OnApertureChange=False|GenerateDRCRulesFile=True|GenerateReliefShapes=True|GerberUnit=Imperial|IncludeUnconnectedMidLayerPads=False|LeadingAndTrailingZeroesMode=SuppressLeadingZeroes|MaxApertureSize=2500000|MinusApertureTolerance=50|Mirror.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean|MirrorDrillDrawingPlots=False|MirrorDrillGuidePlots=False|NumberOfDecimals=5|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Panelize=False|Plot.Set=SerializeLayerHash.Version~2,ClassName~TLayerToBoolean,16973830~1,16973832~1,16973834~1,16777217~1,16842751~1,16973835~1,16973831~1,16908289~1,16908301~1,16908303~1,16973837~1,16973848~1,16973849~1|PlotPositivePlaneLayers=False|PlotUsedDrillDrawingLayerPairs=True|PlotUsedDrillGuideLayerPairs=True|PlusApertureTolerance=50|Record=GerberView|SoftwareArcs=False|Sorted=False
 
 [OutputGroup6]
 Name=Report Outputs
