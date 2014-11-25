@@ -6,3 +6,7 @@ ProjectPath=MainBoard.PrjPcb
 ProjectPath=..\VerticalStrip\VerticalStrip.PrjPcb
 [Project3]
 ProjectPath=..\..\..\..\..\..\..\Program Files (x86)\Altium Designer Summer 09\Library\Miscellaneous Connectors\Miscellaneous Connectors.LIBPKG
+[Project4]
+ProjectPath=..\d21module\d21Module.PrjPCB
+[Project5]
+ProjectPath=..\keymodule\keyModule.PrjPcb
