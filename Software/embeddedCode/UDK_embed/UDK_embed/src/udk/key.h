@@ -184,20 +184,27 @@ typedef enum key_output
 	KEY_OUT_8 = GPIO_KEY_OUT_8
 } KEY_OUTPUT;
 
+
+typedef struct hid_key_data
+{
+	HID_MODIFIER_VAL	modifiers;
+	HID_KEY_VAL			value;//the HID value
+} HID_KEY_DATA;
+
 //create a key object
 typedef struct key_obj
 {
 	KEY_INPUT	column;
-	HID_MODIFIER_VAL	modifiers;
-	HID_KEY_VAL			value;//the HID value
+	HID_KEY_DATA	data;
 	bool keyIsDown;
+	bool justPressed;//this is for the most recent check of the keys
+	bool keyReleased;//this is for the most recent release of the keys
 } KEY_OBJ;
 
 typedef struct key_row
 {
 	KEY_OUTPUT 	row;
 	KEY_OBJ		rowOfKeys[6];//6 keys in a row
-	bool keyIsDown;
 	uint8_t numberOfKeys;
 } KEY_ROW;
 

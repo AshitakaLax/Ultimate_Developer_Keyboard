@@ -36,6 +36,10 @@ void initKeyboard(void);
  */
 void checkKeyboard(void);
 
+void getJustPressedKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys);
+
+
+void getReleaseKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys);
 
 /**
  * Temp function just to validate the keys send the value up

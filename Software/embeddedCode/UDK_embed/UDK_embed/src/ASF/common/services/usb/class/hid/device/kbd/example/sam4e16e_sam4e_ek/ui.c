@@ -189,33 +189,31 @@ void ui_process(uint16_t framenumber)
 	static bool btn_last_state = false;
 	static bool sequence_running = false;
 	static uint8_t sequence_pos = 0;
-	uint8_t value;
+	uint8_t i;
+	uint8_t numberOfKeys = 0;
 	static uint16_t cpt_sof = 0;
-	KEY_OBJ *currentKey;
-//	if ((framenumber % 1000) == 0) {
-//		LED_On(LED1);
-//	}
-//	if ((framenumber % 1000) == 500) {
-//		LED_Off(LED1);
-//	}
-	/* Scan process running each 2ms */
-//	cpt_sof++;
-//	if ((cpt_sof % 2) == 0) {
-//		return;
-//	}
-
+	HID_KEY_DATA *tempKey;
 
 	//check all of the keys here  for any pressed
 	//
 	checkKeyboard();
 
-	currentKey = getPressedKey();
-	if(currentKey != 0)
-	{
+	getJustPressedKeys(tempKey, &numberOfKeys);
 
-		udi_hid_kbd_down(currentKey->value);//key value
-		udi_hid_kbd_modifier_down(currentKey->modifiers);//modifier key
+	for(i = 0; i < numberOfKeys; i++)
+	{
+		udi_hid_kbd_down(tempKey[i]->value);//key value
+		udi_hid_kbd_modifier_down(tempKey[i]->modifiers);//modifier key
 	}
+
+	getReleaseKeys(tempKey, &numberOfKeys);
+
+	for(i = 0; i < numberOfKeys; i++)
+	{
+		udi_hid_kbd_down(tempKey[i]->value);//key value
+		udi_hid_kbd_modifier_down(tempKey[i]->modifiers);//modifier key
+	}
+
 
 	//set the keys with there assoicated HID
 //	udi_hid_kbd_down(value);//key value
