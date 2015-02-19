@@ -198,20 +198,24 @@ void ui_process(uint16_t framenumber)
 	//
 	checkKeyboard();
 
-	getJustPressedKeys(tempKey, &numberOfKeys);
+	tempKey = getJustPressedKeys(&numberOfKeys);
 
 	for(i = 0; i < numberOfKeys; i++)
 	{
-		udi_hid_kbd_down(tempKey[i]->value);//key value
-		udi_hid_kbd_modifier_down(tempKey[i]->modifiers);//modifier key
+		udi_hid_kbd_down((uint8_t)tempKey[i].value);//key value n
+		udi_hid_kbd_modifier_down((uint8_t)tempKey[i].modifiers);//modifier key
+		//for the moment we will just release these keys here
+//		udi_hid_kbd_up((uint8_t)tempKey[i].value);//key value
+//		udi_hid_kbd_modifier_up((uint8_t)tempKey[i].modifiers);//modifier key
 	}
 
-	getReleaseKeys(tempKey, &numberOfKeys);
+	tempKey = getReleaseKeys(&numberOfKeys);
 
 	for(i = 0; i < numberOfKeys; i++)
 	{
-		udi_hid_kbd_down(tempKey[i]->value);//key value
-		udi_hid_kbd_modifier_down(tempKey[i]->modifiers);//modifier key
+		//here is where we will check whether the release key works correctly
+		udi_hid_kbd_up((uint8_t)tempKey[i].value);//key value
+		udi_hid_kbd_modifier_up((uint8_t)tempKey[i].modifiers);//modifier key
 	}
 
 

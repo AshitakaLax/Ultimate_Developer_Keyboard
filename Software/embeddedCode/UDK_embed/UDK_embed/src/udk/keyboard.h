@@ -14,7 +14,7 @@
 
 #include "key.h"
 //CHANGE THE NUMBER OF KEYS BASED ON KEYBOARD
-#define KEY_BOARD_KEYS   4
+#define KEY_BOARD_KEYS   3
 
 
 //create a key object
@@ -36,11 +36,12 @@ void initKeyboard(void);
  */
 void checkKeyboard(void);
 
-void getJustPressedKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys);
+//void getJustPressedKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys);
+
+HID_KEY_DATA *  getJustPressedKeys(uint8_t *numberOfKeys);
 
 
-void getReleaseKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys);
-
+HID_KEY_DATA *  getReleaseKeys(uint8_t *numberOfKeys);
 /**
  * Temp function just to validate the keys send the value up
  */

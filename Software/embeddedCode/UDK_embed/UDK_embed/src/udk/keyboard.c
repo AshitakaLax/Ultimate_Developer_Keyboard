@@ -120,7 +120,7 @@ void initKeyboard(void)
 	{
 
 		keyBoard.rows[i].row = (KEY_OUTPUT)(KEY_OUT_0 + i+ rowOffset);
-
+		keyBoard.rows[i].rowKeyCount = 0;
 		//outputs
 		ioport_set_pin_dir(keyBoard.rows[i].row, IOPORT_DIR_OUTPUT);
 		ioport_set_pin_level(keyBoard.rows[i].row, IOPORT_PIN_LEVEL_LOW);//all low except for the active row
@@ -131,7 +131,7 @@ void initKeyboard(void)
 			keyBoard.rows[i].rowOfKeys[j].keyIsDown = false;
 
 			keyBoard.rows[i].rowOfKeys[j].data.modifiers = hidMapping[index].modifiers;
-			keyBoard.rows[i].rowOfKeys[j].data.value = hidMapping[index++];
+			keyBoard.rows[i].rowOfKeys[j].data.value = hidMapping[index++].value;
 
 			//inputs
 			//set the direction
@@ -148,13 +148,14 @@ void checkKeyboard(void)
 
 	uint8_t i = 0;
 	uint8_t j = 0;
+	uint8_t rowKeyCount = 0;
 	bool keyState = false;
 
 	for(i=0; i < row0Keys; i++)
 	{
 		//set the pit output to be high
 		ioport_set_pin_level(keyBoard.rows[i].row, true);//works
-		
+		rowKeyCount = 0;
 		for(j = 0; j < columns; j++)
 		{
 			keyState = false;
@@ -168,7 +169,7 @@ void checkKeyboard(void)
 				keyBoard.rows[i].rowOfKeys[j].keyIsDown = true;
 				keyBoard.rows[i].rowOfKeys[j].justPressed = true;
 				keyBoard.rows[i].rowOfKeys[j].keyReleased = false;
-
+				rowKeyCount++;
 			}	
 			else if(keyState)
 			{
@@ -176,6 +177,7 @@ void checkKeyboard(void)
 				//it was down previously, but has been released
 				keyBoard.rows[i].rowOfKeys[j].keyIsDown = true;//still true
 				keyBoard.rows[i].rowOfKeys[j].justPressed = false;//still true
+				keyBoard.rows[i].rowOfKeys[j].keyReleased = false;
 			}
 			else
 			{
@@ -189,13 +191,15 @@ void checkKeyboard(void)
 			}
 		}
 		ioport_set_pin_level(keyBoard.rows[i].row, false);
+		keyBoard.rows[i].rowKeyCount = rowKeyCount;
+
 	}
 	
 	//iterate through all of the keys
 }
 
 
-void getJustPressedKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys)
+HID_KEY_DATA *  getJustPressedKeys(uint8_t *numberOfKeys)
 {
 	uint8_t i;
 	uint8_t j;
@@ -209,16 +213,16 @@ void getJustPressedKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys)
 			if(keyBoard.rows[i].rowOfKeys[j].justPressed)
 			{
 				downKeys[keyCounter].modifiers = keyBoard.rows[i].rowOfKeys[j].data.modifiers;
-				downKeys[keyCounter].value = keyBoard.rows[i].rowOfKeys[j].data.value;
+				downKeys[keyCounter++].value = keyBoard.rows[i].rowOfKeys[j].data.value;
 			}
 
 		}
 	}
 	*numberOfKeys = keyCounter;
-	keys = downKeys;
+	return downKeys;
 }
 
-void getReleaseKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys)
+HID_KEY_DATA *  getReleaseKeys(uint8_t *numberOfKeys)
 {
 	uint8_t i;
 	uint8_t j;
@@ -232,13 +236,15 @@ void getReleaseKeys(HID_KEY_DATA * keys, uint8_t *numberOfKeys)
 			if(keyBoard.rows[i].rowOfKeys[j].keyReleased)
 			{
 				releasedKeys[keyCounter].modifiers = keyBoard.rows[i].rowOfKeys[j].data.modifiers;
-				releasedKeys[keyCounter].value = keyBoard.rows[i].rowOfKeys[j].data.value;
+				releasedKeys[keyCounter++].value = keyBoard.rows[i].rowOfKeys[j].data.value;
+				keyBoard.rows[i].rowOfKeys[j].keyReleased = false;
+
 			}
 
 		}
 	}
 	*numberOfKeys = keyCounter;
-	keys = releasedKeys;
+	return releasedKeys;
 }
 
 

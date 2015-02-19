@@ -206,6 +206,7 @@ typedef struct key_row
 	KEY_OUTPUT 	row;
 	KEY_OBJ		rowOfKeys[6];//6 keys in a row
 	uint8_t numberOfKeys;
+	uint8_t rowKeyCount; //number of keys pressed
 } KEY_ROW;
 
 void initKeyObj(KEY_OBJ *keyObj, KEY_INPUT input, KEY_OUTPUT output);
