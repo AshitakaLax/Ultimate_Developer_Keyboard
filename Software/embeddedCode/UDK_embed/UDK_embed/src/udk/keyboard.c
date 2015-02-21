@@ -17,7 +17,7 @@ static uint8_t row0Keys = 3;//we currently have Rows 3,4,5
 static uint8_t rowOffset = 3;//row offset
 static uint8_t columns = 6;
 #define NUMBER_OF_KEY_DATA  10
-#define VALID_KEY_COUNT  5 // there has to be 5 checks on the pin in order for it to be valid
+#define VALID_KEY_COUNT  10 // there has to be 5 checks on the pin in order for it to be valid
 
 typedef struct key_data_buffer
 {
@@ -36,12 +36,13 @@ static HID_KEY_DATA hidMapping[18];
 
 static void clearDownKeys(void);
 static void clearReleasedKeys(void);
+static void addDownKeyToBuffer(HID_KEY_DATA data);
+static void addReleaseKeyToBuffer(HID_KEY_DATA data);
 
 /**
  * Adds a key to the downKey buffer to send the keys out
  */
-static void addDownKeyToBuffer(HID_KEY_DATA data);
-static void addReleaseKeyToBuffer(HID_KEY_DATA data)
+
 static void setupMapping(void)
 {
 	uint8_t index = 0;
@@ -147,7 +148,15 @@ void initKeyboard(void)
 		{
 			KEY_OBJ * currentKey = &keyBoard.rows[i].rowOfKeys[j];
 
-			currentKey->column = ((KEY_INPUT)KEY_IN_0 + j);
+			if(columns == 5)
+			{
+				currentKey->column = ((KEY_INPUT)KEY_IN_9);
+
+			}
+			else
+			{
+				currentKey->column = ((KEY_INPUT)KEY_IN_0 + j);
+			}
 			currentKey->keyIsDown = false;
 			currentKey->justPressed = false;
 			currentKey->keyReleased = false;
@@ -181,6 +190,7 @@ void checkKeyboard(void)
 		KEY_OUTPUT row = keyBoard.rows[i].row;
 		ioport_set_pin_level(row, true);//works
 		rowKeyCount = 0;
+		delay_us(100);
 		//we need a wait period here for the pin levels to settle.
 		for(j = 0; j < columns; j++)
 		{
