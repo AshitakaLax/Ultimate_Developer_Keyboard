@@ -16,7 +16,7 @@
 //CHANGE THE NUMBER OF KEYS BASED ON KEYBOARD
 #define KEY_BOARD_KEYS   3
 
-
+//all keyboards are capable of
 //create a key object
 typedef struct key_board_obj
 {
@@ -24,6 +24,7 @@ typedef struct key_board_obj
 	KEY_ROW rows[KEY_BOARD_KEYS];//all of the keys on the board
 	bool keyIsDown;
 } KEY_BOARD_OBJ;
+
 
 
 /**
@@ -45,7 +46,7 @@ HID_KEY_DATA *  getReleaseKeys(uint8_t *numberOfKeys);
 /**
  * Temp function just to validate the keys send the value up
  */
-KEY_OBJ *getPressedKey(void);
+HID_KEY_DATA getPressedKey(void);
 /**
  * This gets the number of keys that are being pressed
  * @return the number of keys

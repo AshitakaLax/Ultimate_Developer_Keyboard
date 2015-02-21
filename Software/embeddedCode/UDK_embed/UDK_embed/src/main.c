@@ -93,7 +93,8 @@ int main(void)
 		// to scan keyboard interface then use main loop
 		if (main_b_kbd_enable) {
 			static volatile uint16_t virtual_sof_sub = 0;
-			if (sysclk_get_cpu_hz()/50000 ==
+			uint32_t cpuSpeed =sysclk_get_cpu_hz();
+			if (cpuSpeed/100000 ==
 				virtual_sof_sub++) {
 				virtual_sof_sub = 0;
 				static uint16_t virtual_sof = 0;

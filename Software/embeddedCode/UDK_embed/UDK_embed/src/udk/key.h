@@ -196,6 +196,7 @@ typedef struct key_obj
 {
 	KEY_INPUT	column;
 	HID_KEY_DATA	data;
+	uint16_t		validCount;
 	bool keyIsDown;
 	bool justPressed;//this is for the most recent check of the keys
 	bool keyReleased;//this is for the most recent release of the keys

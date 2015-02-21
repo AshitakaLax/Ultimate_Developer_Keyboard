@@ -31,15 +31,21 @@
         <options>
           <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.clock" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common.services.basic.sleepmgr" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.basic.sleepmgr" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.usb.class.device" value="Add" config="hid_keyboard" content-id="Atmel.ASF" />
+          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.usb.class.hid.device.keyboard.example" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.sam4e.source.template" value="Add" config="" content-id="Atmel.ASF" />
         </options>
         <configurations>
           <configuration key="config.board.sam4e_ek.led" value="yes" default="yes" content-id="Atmel.ASF" />
           <configuration key="config.common.services.usb.class.device" value="hid_keyboard" default="hid_keyboard" content-id="Atmel.ASF" />
+          <configuration key="config.compiler.armgcc.fpu_used" value="yes" default="yes" content-id="Atmel.ASF" />
+          <configuration key="config.compiler.armgcc.printf" value="iprintf" default="iprintf" content-id="Atmel.ASF" />
+          <configuration key="config.compiler.armgcc.scanf" value="iscanf" default="iscanf" content-id="Atmel.ASF" />
+          <configuration key="config.sam.drivers.udp.device.sleepmgr" value="with_sleepmgr" default="with_sleepmgr" content-id="Atmel.ASF" />
+          <configuration key="config.sam.pio.pio_handler" value="yes" default="yes" content-id="Atmel.ASF" />
         </configurations>
         <files>
           <file path="src/ASF/common/boards/board.h" framework="" version="" source="common/boards/board.h" changed="False" content-id="Atmel.ASF" />
@@ -203,6 +209,9 @@
           <file path="src/ASF/thirdparty/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a" framework="" version="" source="thirdparty/CMSIS/Lib/GCC/libarm_cortexM4lf_math.a" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/thirdparty/CMSIS/README.txt" framework="" version="" source="thirdparty/CMSIS/README.txt" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/thirdparty/CMSIS/license.txt" framework="" version="" source="thirdparty/CMSIS/license.txt" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/sam/cycle_counter.c" framework="" version="3.20.1" source="common\services\delay\sam\cycle_counter.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/sam/cycle_counter.h" framework="" version="3.20.1" source="common\services\delay\sam\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.20.1" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.20.1/common.services.usb.class.hid.device.keyboard.example.sam4e_ek/html/index.html" />
         <offline-documentation help="" />
@@ -288,6 +297,7 @@
       <Value>../src/ASF/sam/drivers/udp</Value>
       <Value>../src/ASF/common/services/usb/class/hid</Value>
       <Value>../src/ASF/sam/boards/sam4e_ek</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -341,6 +351,7 @@
       <Value>../src/ASF/sam/drivers/udp</Value>
       <Value>../src/ASF/common/services/usb/class/hid</Value>
       <Value>../src/ASF/sam/boards/sam4e_ek</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -396,6 +407,7 @@
       <Value>../src/ASF/sam/drivers/udp</Value>
       <Value>../src/ASF/common/services/usb/class/hid</Value>
       <Value>../src/ASF/sam/boards/sam4e_ek</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
@@ -451,6 +463,7 @@
       <Value>../src/ASF/sam/drivers/udp</Value>
       <Value>../src/ASF/common/services/usb/class/hid</Value>
       <Value>../src/ASF/sam/boards/sam4e_ek</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -465,6 +478,8 @@
     <Folder Include="src\ASF\common\services\" />
     <Folder Include="src\ASF\common\services\clock\" />
     <Folder Include="src\ASF\common\services\clock\sam4e\" />
+    <Folder Include="src\ASF\common\services\delay\" />
+    <Folder Include="src\ASF\common\services\delay\sam\" />
     <Folder Include="src\ASF\common\services\ioport\" />
     <Folder Include="src\ASF\common\services\ioport\sam\" />
     <Folder Include="src\ASF\common\services\sleepmgr\" />
@@ -516,6 +531,15 @@
     <Folder Include="src\udk" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\ASF\common\services\delay\delay.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\delay\sam\cycle_counter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\delay\sam\cycle_counter.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\udk\key.c">
       <SubType>compile</SubType>
     </Compile>
