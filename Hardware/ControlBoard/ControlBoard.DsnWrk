@@ -1,0 +1,8 @@
+[ProjectGroup]
+Version=1.0
+[Project1]
+ProjectPath=ControlBoard.PrjPcb
+[Project2]
+ProjectPath=..\mikKeyBoard\Keyboard\Keyboard.PrjPcb
+[Project3]
+ProjectPath=..\mikKeyBoard\keyboardV2\KeyBoardV2.PrjPcb
