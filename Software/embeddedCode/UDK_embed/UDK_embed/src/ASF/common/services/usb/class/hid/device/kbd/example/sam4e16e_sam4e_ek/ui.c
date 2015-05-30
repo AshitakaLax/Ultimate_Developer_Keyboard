@@ -134,28 +134,7 @@ void ui_process(uint16_t framenumber)
 	//check all of the keys here  for any pressed
 	//
 	checkKeyboard();
-//	pressedKey = getPressedKey();
-//
-//
-//	//check if the previous
-//	if(previousKey.value != 0 && pressedKey.value == 0)
-//	{
-//		udi_hid_kbd_up((uint8_t)previousKey.value);//key value
-//		udi_hid_kbd_modifier_up((uint8_t)previousKey.modifiers);//modifier key
-//		//set the previous key to be 0
-//		previousKey.value = 0;
-//	}
-//
-//
-//	if(pressedKey.value != 0 && previousKey.value == 0)
-//	{
-//		previousKey = pressedKey;
-//		//then
-//		//press the key and
-//		udi_hid_kbd_down((uint8_t)pressedKey.value);//key value n
-//		udi_hid_kbd_modifier_down((uint8_t)pressedKey.modifiers);//modifier key
-//
-//	}
+
 	tempKey = getJustPressedKeys(&numberOfKeys);
 
 
@@ -174,14 +153,6 @@ void ui_process(uint16_t framenumber)
 		udi_hid_kbd_up((uint8_t)tempKey[i].value);//key value
 		udi_hid_kbd_modifier_up((uint8_t)tempKey[i].modifiers);//modifier key
 	}
-//
-//
-//	//set the keys with there assoicated HID
-//	/* Sequence process running each period */
-//	if (SEQUENCE_PERIOD > cpt_sof) {
-//		return;
-//	}
-//	cpt_sof = 0;
 
 }
 

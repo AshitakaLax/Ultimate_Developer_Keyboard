@@ -94,7 +94,7 @@ int main(void)
 		if (main_b_kbd_enable) {
 			static volatile uint16_t virtual_sof_sub = 0;
 			uint32_t cpuSpeed =sysclk_get_cpu_hz();
-			if (cpuSpeed/100000 ==
+			if (cpuSpeed/500000 ==
 				virtual_sof_sub++) {
 				virtual_sof_sub = 0;
 				static uint16_t virtual_sof = 0;

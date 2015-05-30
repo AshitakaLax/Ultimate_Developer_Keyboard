@@ -16,6 +16,7 @@ static KEY_BOARD_OBJ keyBoard;
 static uint8_t row0Keys = 3;//we currently have Rows 3,4,5
 static uint8_t rowOffset = 3;//row offset
 static uint8_t columns = 6;
+
 #define NUMBER_OF_KEY_DATA  10
 #define VALID_KEY_COUNT  10 // there has to be 5 checks on the pin in order for it to be valid
 
@@ -32,7 +33,7 @@ static HID_KEY_DATA downKeys[NUMBER_OF_KEY_DATA];//this is all of the keys that 
 static HID_KEY_DATA releasedKeys[NUMBER_OF_KEY_DATA];//this is all of the keys that are currently being pressed
 
 static HID_KEY_DATA hidMapping[18];
-
+static bool backLight;
 
 static void clearDownKeys(void);
 static void clearReleasedKeys(void);
@@ -135,6 +136,11 @@ void initKeyboard(void)
 	clearReleasedKeys();
 	clearDownKeys();
 
+	//setup the backlight 
+	ioport_set_pin_dir(GPIO_BACKLIGHT_OUT, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_level(GPIO_BACKLIGHT_OUT, IOPORT_PIN_LEVEL_LOW);//all low except for the active row
+	backLight = true;
+
 	for(i = 0; i < row0Keys; i++)
 	{
 
@@ -150,7 +156,7 @@ void initKeyboard(void)
 
 			if(columns == 5)
 			{
-				currentKey->column = ((KEY_INPUT)KEY_IN_9);
+				currentKey->column = ((KEY_INPUT)KEY_IN_10);
 
 			}
 			else
@@ -161,6 +167,8 @@ void initKeyboard(void)
 			currentKey->justPressed = false;
 			currentKey->keyReleased = false;
 			currentKey->validCount = 0;
+			currentKey->releaseCount = 0;
+
 
 
 			currentKey->data.modifiers = hidMapping[index].modifiers;
@@ -184,6 +192,16 @@ void checkKeyboard(void)
 	uint8_t rowKeyCount = 0;
 	bool keyState = false;
 
+	backLight = !backLight;
+	if(backLight)
+	{
+		ioport_set_pin_level(GPIO_BACKLIGHT_OUT, IOPORT_PIN_LEVEL_HIGH);//all low except for the active row
+	}
+	else
+	{
+		ioport_set_pin_level(GPIO_BACKLIGHT_OUT, IOPORT_PIN_LEVEL_LOW);//all low except for the active row
+	}
+
 	for(i=0; i < row0Keys; i++)
 	{
 		//set the pit output to be high
@@ -204,6 +222,8 @@ void checkKeyboard(void)
 			{
 				//incrementKeyCount
 				currentKey->validCount++;//
+
+				currentKey->releaseCount = 0;
 				if(currentKey->validCount == VALID_KEY_COUNT)
 				{
 					//set the key to be just pressed
@@ -226,14 +246,24 @@ void checkKeyboard(void)
 			{
 				//reset the valid count
 				currentKey->validCount = 0;
+				currentKey->releaseCount++;
+
 				//check if the key is down
 				if(currentKey->keyIsDown)
 				{
-					//key was just release
-					addReleaseKeyToBuffer(currentKey->data);
-					currentKey->justPressed = false;
-					currentKey->keyIsDown = false;
-					currentKey->keyReleased = true;
+
+					if(currentKey->releaseCount == VALID_KEY_COUNT)
+					{
+						//key was just release
+						addReleaseKeyToBuffer(currentKey->data);
+						currentKey->justPressed = false;
+						currentKey->keyIsDown = false;
+						currentKey->keyReleased = true;
+					}
+					else if(currentKey->releaseCount > VALID_KEY_COUNT)
+					{
+						currentKey->releaseCount--;
+					}
 				}
 
 			}
