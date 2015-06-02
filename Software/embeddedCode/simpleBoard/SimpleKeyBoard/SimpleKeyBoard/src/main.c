@@ -56,7 +56,7 @@ static volatile bool main_b_cdc_enable = false;
 
 /*! \brief Main function. Execution starts here.
  */
-int main(void)// 
+int main(void)//
 {
 	irq_initialize_vectors();
 	cpu_irq_enable();

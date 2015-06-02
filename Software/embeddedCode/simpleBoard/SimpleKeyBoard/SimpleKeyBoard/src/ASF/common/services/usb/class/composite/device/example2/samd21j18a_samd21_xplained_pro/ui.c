@@ -190,7 +190,7 @@ void ui_process(uint16_t framenumber)
 
 	//use the cpt_sof to handle the debounce
 	cpt_sof++;
-	if(cpt_sof < 7)
+	if(cpt_sof < 15)
 	{
 		return;
 	}
