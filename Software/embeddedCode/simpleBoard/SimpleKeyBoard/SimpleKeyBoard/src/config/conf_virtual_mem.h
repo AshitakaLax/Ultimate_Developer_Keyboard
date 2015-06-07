@@ -52,6 +52,6 @@
 #define _CONF_VIRTUAL_MEM_H_
 
 //! Size of Virtual Memory on internal RAM (unit 512B)
-#define VMEM_NB_SECTOR 48 // Internal RAM 24KB (should > 20KB or PC can not format it)
+#define VMEM_NB_SECTOR 24 // Internal RAM 24KB (should > 20KB or PC can not format it)
 
 #endif // _CONF_VIRTUAL_MEM_H_

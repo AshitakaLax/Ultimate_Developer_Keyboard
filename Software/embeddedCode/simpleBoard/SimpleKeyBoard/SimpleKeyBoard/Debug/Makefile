@@ -158,6 +158,7 @@ C_SRCS +=  \
 ../src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.c \
 ../src/ASF/sam0/utils/syscalls/gcc/syscalls.c \
 ../src/keyboard/KeyRow.c \
+../src/keyboard/salloc.c \
 ../src/main.c \
 ../src/memories_initialization_samd.c \
 ../src/uart_samd.c
@@ -205,6 +206,7 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o \
 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/keyboard/KeyRow.o \
+src/keyboard/salloc.o \
 src/main.o \
 src/memories_initialization_samd.o \
 src/uart_samd.o
@@ -245,6 +247,7 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o \
 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/keyboard/KeyRow.o \
+src/keyboard/salloc.o \
 src/main.o \
 src/memories_initialization_samd.o \
 src/uart_samd.o
@@ -285,6 +288,7 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.d \
 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.d \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
 src/keyboard/KeyRow.d \
+src/keyboard/salloc.d \
 src/main.d \
 src/memories_initialization_samd.d \
 src/uart_samd.d
@@ -325,6 +329,7 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.d \
 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.d \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
 src/keyboard/KeyRow.d \
+src/keyboard/salloc.d \
 src/main.d \
 src/memories_initialization_samd.d \
 src/uart_samd.d
@@ -344,6 +349,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

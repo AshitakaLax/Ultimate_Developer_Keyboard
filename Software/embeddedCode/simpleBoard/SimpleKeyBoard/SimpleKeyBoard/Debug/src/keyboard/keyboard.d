@@ -151,7 +151,7 @@ src/keyboard/keyboard.d src/keyboard/keyboard.o: \
  ../src/ASF/common/services/usb/udc/udd.h \
  ../src/ASF/common/services/usb/class/hid/device/udi_hid.h \
  ../src/keyboard/keyboard.h ../src/keyboard/KeyRow.h \
- ../src/keyboard/Key.h ../src/keyboard/KeyIO.h
+ ../src/keyboard/Key.h ../src/keyboard/KeyIO.h ../src/keyboard/Salloc.h
 
 ../src/asf.h:
 
@@ -474,3 +474,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 ../src/keyboard/Key.h:
 
 ../src/keyboard/KeyIO.h:
+
+../src/keyboard/Salloc.h:

@@ -12,14 +12,19 @@
 #include "KeyIO.h"
 #include <delay.h>
 #include <usb_protocol_hid.h>
+#include "Salloc.h"
 
 static KEYBOARD_OBJ keyboardObj;
 static KEYBOARD_OBJ rightKeyboardObj;
 #define KEY_DELAY_MS    1
 
+#define MAX_NUMBER_OF_LAYERS    15
+
 
 static void wakeUpKeyboard(void);
 
+static void handleKeyJustPressed(KEY_OBJ *key);
+static void handleKeyJustReleased(KEY_OBJ *key);
 
 //it is a 6 x 7 matrixst
 
@@ -30,8 +35,6 @@ static void wakeUpKeyboard(void);
 //caps aoeui
 //shift 'qjkx
 //cntrl alt windows
-
-//space back space 
 
 static uint8_t keyArray[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 	HID_SPACEBAR, HID_DELETE, HID_BACKSPACE, HID_SPACEBAR, HID_PAGEDOWN, HID_J,
@@ -70,26 +73,205 @@ static uint8_t keyArray2[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 
 //ASCII ART
 
-// ___________________________________________                             ___________________________________________
-// |  1  |  2  |  3  |  4  |  5  |  6  |  7  |                             |  45 |  44 |  43 |  42 |  41 |  40 |  39 |
-// -------------------------------------------                             -------------------------------------------
-// |  8  |  9  |  10 |  11 |  12 |  13 |     |                             |     |  51 |  50 |  49 |  48 |  47 |  46 |
-// ------------------------------------| 14  |                             | 52  |------------------------------------
-// |  15 |  16 |  17 |  18 |  19 |  20 |_____|                             |_____|  58 |  57 |  56 |  55 |  54 |  53 |
-// ------------------------------------|     |                             |     |------------------------------------
-// |  21 |  22 |  23 |  24 |  25 |  26 | 27  |  __________   __________    |  65 |  64 |  63 |  62 |  61 |  60 |  59 |
-// ------------------------------------------- / 38 / 37 /   \ 75 \ 76 \   -------------------------------------------
-//  | 28 |  29 |  30 |  31 |  32 |       _____/____/____/     \____\____\_____         |  70 |  69 |  68 |  67 | 66 |
-//  ------------------------------      /    /    / 36 /       \ 74 \    \    \        ------------------------------
-//                                     / 33 / 34 /____/         \____\ 72 \ 71 \ 
-//                                    /    /    / 35 /           \ 73 \    \    \
-//                                   /____/____/____/             \____\____\____\
 
+
+//     KEY ID TABLE
+// ___________________________________________                             ___________________________________________
+// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |                             |  45 |  44 |  43 |  42 |  41 |  40 |  39 |
+// -------------------------------------------                             -------------------------------------------
+// |  7  |  8  |  9  |  10 |  11 |  12 |     |                             |     |  51 |  50 |  49 |  48 |  47 |  46 |
+// ------------------------------------| 13  |                             | 52  |------------------------------------
+// |  14 |  15 |  16 |  17 |  18 |  19 |_____|                             |_____|  58 |  57 |  56 |  55 |  54 |  53 |
+// ------------------------------------|     |                             |     |------------------------------------
+// |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  __________   __________    |  65 |  64 |  63 |  62 |  61 |  60 |  59 |
+// ------------------------------------------- / 37 / 36 /   \ 75 \ 76 \   -------------------------------------------
+//  | 27 |  28 |  29 |  30 |  31 |       _____/____/____/     \____\____\_____         |  70 |  69 |  68 |  67 | 66 |
+//  ------------------------------      /    /    / 35 /       \ 74 \    \    \        ------------------------------
+//                                     / 32 / 33 /____/         \____\ 72 \ 71 \ 
+//                                    /    /    / 34 /           \ 73 \    \    \
+//                                   /____/____/____/             \____\____\____\
+//
+static uint8_t keyIdMapping[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
+	//HID_SPACEBAR, HID_DELETE, HID_BACKSPACE, HID_SPACEBAR, HID_PAGEDOWN, HID_J,
+	//HID_PAGEUP,
+	//HID_P, HID_6, HID_7, HID_8, HID_9, HID_0,
+	//HID_I, HID_O,
+	//HID_Z, HID_X, HID_C, HID_V, HID_B, HID_U,
+	//HID_TAB, HID_A, HID_S, HID_D, HID_F, HID_G,	HID_T,
+	//HID_TAB/**TODO change to be Alt **/, HID_Q, HID_W, HID_E, HID_R, HID_T, HID_CAPS_LOCK,
+  //C6, C5, C4, C3, C2, C1, C0
+	36, 37, 35, 32, 33, 34, 0,//Row0
+	27, 28, 29, 30, 31, 0, 0,//Row1
+	20, 21, 22, 23, 24, 25, 26,//Row2
+	14, 15, 16, 17, 18, 19, 0,//Row3
+	 7,  8,  9, 10, 11, 12, 13,//Row4
+	0,1, 2, 3,4,5,6//Row5
+	};
+
+//we need a keyboard that is strictly not the keys, but what happens after a key is pressed
+typedef struct layer_manager
+{
+	LAYER* layers[MAX_NUMBER_OF_LAYERS];
+	uint8_t numberOfLayers;//the current number of layers on the board
+	KEYBOARD_LAYER currentLayer;	
+}LAYER_MANAGER;
+
+static LAYER_MANAGER boardLayerManager;
 
 void initKeys(void)
 {
 	//here we will setup the keys for the specific boards
+	//need an array of pointers
+	uint8_t keyIndex = 0;
+	//create the keys and handle them
+	GENERIC_KEY * tempKey;
+
+	//Top Row left hand
+	tempKey = initStandardKey(HID_PLUS, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 	
+	tempKey = initStandardKey(HID_1, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_2, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_3, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_4, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_5, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ESCAPE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+
+	//Second Row left hand
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Q, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_W, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_E, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_R, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_T, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 left hand
+	tempKey = initStandardKey(HID_TAB, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_A, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_S, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_D, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_F, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_G, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	//Row 4 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_Z, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_X, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_C, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_V, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	tempKey = initStandardKey(HID_B, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+		
+	//Row 5 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_TILDE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+	//Thumb keys left hand
+	tempKey = initStandardKey(HID_BACKSPACE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DELETE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_END, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_HOME, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+
+}
+
+static void initLayerManager(void)
+{
+	boardLayerManager.currentLayer = STANDARD_LAYER;
+	boardLayerManager.numberOfLayers = 0;
+	//initialize all layers to be 0
+	//change to memset
+	for(uint8_t i = 0; i < MAX_NUMBER_OF_LAYERS; i++)
+	{
+		//make sure that they are all 0
+		boardLayerManager.layers[i] = 0;		
+	}
+
+	//setup the standard layer
+	LAYER * temp = initLayer(STANDARD_LAYER);
+	if(!addLayer(temp))
+	{
+		//error couldn't add the layer to the system.
+	}
+
 }
 
 void initKeyBoard(void)
@@ -100,6 +282,8 @@ void initKeyBoard(void)
 	uint8_t i = 0;
 	uint8_t j = 0;
 	//setup data structure
+	initLayerManager();
+	initKeys();
 	
 //outputs
 	keyboardObj.rowIOArr[0] = ROW_0;
@@ -225,6 +409,7 @@ void initKeyBoard(void)
 			key->columnIO = keyboardObj.columnIOArr[j];
 			key->currentState = false;
 			key->previousState = false;
+			key->keyId = keyIdMapping[i][j];
 			key->hidKeyMod = 0;
 			key->hidKey = keyArray[i][j];//   HID_A+j+i;//no HID Key
 			key->keyJustDown = false;
@@ -259,6 +444,65 @@ void initKeyBoard(void)
 	
 }
 
+
+LAYER *initLayer(KEYBOARD_LAYER layer)
+{
+	//a layer holds the number of keys on the board(whether 64, 76, 108, any number)
+	LAYER *boardLayer = (LAYER*)salloc(sizeof(LAYER));
+	boardLayer->type = layer;
+	//zero out all of the keys
+	for(uint8_t i = 0; i < NUMBER_OF_KEYS; i++)
+	{
+		boardLayer->keys[i] = 0;
+	}
+	return boardLayer;
+}
+
+bool addLayer(LAYER *layer)
+{
+	//check if we already have a the same layer in the manager
+	for(uint8_t i = 0; i < boardLayerManager.numberOfLayers; i++)
+	{
+		
+		if(boardLayerManager.layers[i]->type == layer->type)
+		{
+			return false;//Layer is already in the manager, add a different one
+		}
+	}
+	//add the layer to the manager
+	boardLayerManager.layers[boardLayerManager.numberOfLayers] = layer;
+	boardLayerManager.numberOfLayers++;
+}
+// Adds a key
+// You can override already assigned keys in run time
+bool addKey(uint8_t keyId, GENERIC_KEY *key, KEYBOARD_LAYER layer)
+{
+	//adds a key to a specific layer already on the board
+	for(uint8_t i = 0; i < boardLayerManager.numberOfLayers; i++)
+	{
+		if(boardLayerManager.layers[i]->type == layer)
+		{
+			//valid layer
+			return addKeyToLayer(keyId, key, boardLayerManager.layers[i]);
+		}
+	}
+	return false;//layer currently isn't in the board
+}
+
+bool addKeyToLayer(uint8_t keyId, GENERIC_KEY *key, LAYER *layer)
+{
+	//can over write existing keys
+	//check that the input is valid
+	if(key == 0 || layer == 0)
+	{
+		return false;//invalid key, or layer
+	}
+	layer->keys[keyId] = key;
+	return true;
+}
+
+
+
 uint8_t checkKeys(void)
 {
 	uint8_t i = 0;
@@ -287,6 +531,7 @@ uint8_t checkKeys(void)
 				if(key->keyHoldCount == 1)
 				{
 					key->keyJustDown = true;
+					handleKeyJustPressed(key);
 				}
 				else
 				{
@@ -300,7 +545,8 @@ uint8_t checkKeys(void)
 				if (key->keyHoldCount != 0 && key->keyJustRelease == false)
 				{
 					key->keyJustRelease = true;
-					
+					//handle the key being released
+					handleKeyJustReleased(key);
 				}
 				else
 				{
@@ -353,6 +599,8 @@ uint8_t checkKeys(void)
 		ioport_set_pin_level(row->rowIO, false);//set the pin low
 		ioport_set_pin_level(rightRow->rowIO, false);//set the pin low
 	}
+	
+	
 	return 0;
 }
 
@@ -443,5 +691,61 @@ static void wakeUpKeyboard(void)
 	
 	//udc_remotewakeup();//wakeup the keyboard if it was in sleep mode.
 	
+	
+}
+
+
+static void handleKeyJustPressed(KEY_OBJ *key)
+{
+	LAYER *layer = boardLayerManager.layers[boardLayerManager.currentLayer];
+	uint8_t keyId = key->keyId;
+	GENERIC_KEY *genericKey = layer->keys[keyId];
+	if(genericKey == 0)
+	{	
+		return;//no key
+	}
+	//since all of the generic keys have the type as the first var in the struct this works
+	KEY_PTR_TYPE keyType = genericKey->standard.type;
+	if(keyType == STANDARD_KEY_TYPE)
+	{
+		//
+		STANDARD_KEY *standardKey = (STANDARD_KEY*) genericKey;
+		udi_hid_kbd_modifier_down(standardKey->modifiers);
+		udi_hid_kbd_down(standardKey->hid);
+
+		
+	}
+	else if(keyType == LAYER_KEY_TYPE)
+	{
+		
+		
+	}
+	
+}
+
+
+static void handleKeyJustReleased(KEY_OBJ *key)
+{
+	LAYER *layer = boardLayerManager.layers[boardLayerManager.currentLayer];
+	uint8_t keyId = key->keyId;
+	GENERIC_KEY *genericKey = layer->keys[keyId];
+	if(genericKey == 0)
+	{
+		
+		return;//no key
+	}
+	//since all of the generic keys have the type as the first var in the struct this works
+	KEY_PTR_TYPE keyType = genericKey->standard.type;
+	if(keyType == STANDARD_KEY_TYPE)
+	{
+		STANDARD_KEY *standardKey = (STANDARD_KEY*) genericKey;
+		udi_hid_kbd_modifier_up(standardKey->modifiers);
+		udi_hid_kbd_up(standardKey->hid);		
+	}
+	else if(keyType == LAYER_KEY_TYPE)
+	{
+		
+		
+	}
 	
 }

@@ -72,6 +72,8 @@ src\ASF\sam0\utils\syscalls\gcc\syscalls.c
 
 src\keyboard\KeyRow.c
 
+src\keyboard\salloc.c
+
 src\main.c
 
 src\memories_initialization_samd.c

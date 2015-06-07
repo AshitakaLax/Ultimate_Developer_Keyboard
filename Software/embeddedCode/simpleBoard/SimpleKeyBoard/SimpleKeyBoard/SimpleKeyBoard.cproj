@@ -1426,6 +1426,12 @@
     <Compile Include="src\keyboard\KeyIO.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\keyboard\salloc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\keyboard\Salloc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>

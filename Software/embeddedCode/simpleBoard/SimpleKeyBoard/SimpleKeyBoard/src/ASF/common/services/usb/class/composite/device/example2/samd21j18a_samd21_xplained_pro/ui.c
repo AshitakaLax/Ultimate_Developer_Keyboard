@@ -218,46 +218,47 @@ void ui_process(uint16_t framenumber)
 	for(i = 0; i < NUM_OF_KEY_COLUMNS*NUM_OF_KEY_ROWS; i++)
 	{
 		keyArr[i] = 0;
-	}	
+	}
+	//checks and sends the keys to the pc	
 	checkKeys();
-	numberOfKeys = getJustPressedKeys(keyArr);
+	//numberOfKeys = getJustPressedKeys(keyArr);
 	
 	//for the first 6 keys
-	for(i = 0; i < numberOfKeys; i++)
-	{
-		if(keyArr[i]->hidKey != 0 && hidOnlyCount < 6)
-		{
-			keyValue = keyArr[i]->hidKey;
-			udi_hid_kbd_down(keyValue);
-			hidOnlyCount++;
-			
-			LED_On(LED_0_PIN);
-		}
-		//check the modifier keys
-		if(keyArr[i]->hidKeyMod != HID_MODIFIER_NONE)
-		{
-			udi_hid_kbd_modifier_down(keyArr[i]->hidKeyMod);
-		}
-	}
+	//for(i = 0; i < numberOfKeys; i++)
+	//{
+		//if(keyArr[i]->hidKey != 0 && hidOnlyCount < 6)
+		//{
+			//keyValue = keyArr[i]->hidKey;
+			//udi_hid_kbd_down(keyValue);
+			//hidOnlyCount++;
+			//
+			//LED_On(LED_0_PIN);
+		//}
+		////check the modifier keys
+		//if(keyArr[i]->hidKeyMod != HID_MODIFIER_NONE)
+		//{
+			//udi_hid_kbd_modifier_down(keyArr[i]->hidKeyMod);
+		//}
+	//}
 	
-	numberOfKeys = getJustReleaseKeys(keyArr);
+	//numberOfKeys = getJustReleaseKeys(keyArr);
 		
 	//for the first 6 keys
-	for(i = 0; i < numberOfKeys; i++)
-	{
-		if(keyArr[i]->hidKey != 0 && hidOnlyCount < 6)
-		{
-			udi_hid_kbd_up(keyArr[i]->hidKey);
-			hidOnlyCount++;
-			
-			LED_Off(LED_0_PIN);
-		}
-		//check the modifier keys
-		if(keyArr[i]->hidKeyMod != HID_MODIFIER_NONE)
-		{
-			udi_hid_kbd_modifier_up(keyArr[i]->hidKeyMod);
-		}
-	}
+	//for(i = 0; i < numberOfKeys; i++)
+	//{
+		//if(keyArr[i]->hidKey != 0 && hidOnlyCount < 6)
+		//{
+			//udi_hid_kbd_up(keyArr[i]->hidKey);
+			//hidOnlyCount++;
+			//
+			//LED_Off(LED_0_PIN);
+		//}
+		////check the modifier keys
+		//if(keyArr[i]->hidKeyMod != HID_MODIFIER_NONE)
+		//{
+			//udi_hid_kbd_modifier_up(keyArr[i]->hidKeyMod);
+		//}
+	//}
 	
 	//if(button_function) {
 		//if (cpt_sof < 5) {
