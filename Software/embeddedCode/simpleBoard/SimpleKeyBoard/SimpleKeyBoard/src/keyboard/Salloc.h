@@ -10,7 +10,9 @@
 #define SALLOC_H_
 #include <stdint.h>
 
-uint8_t * salloc(uint8_t size);
+void initSalloc(void);
+
+uint8_t * salloc(uint32_t size);
 
 uint16_t getMemoryLeft(void);
 

@@ -77,18 +77,18 @@ static uint8_t keyArray2[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 
 //     KEY ID TABLE
 // ___________________________________________                             ___________________________________________
-// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |                             |  45 |  44 |  43 |  42 |  41 |  40 |  39 |
+// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |                             |  44 |  43 |  42 |  41 |  40 |  39 |  38 |
 // -------------------------------------------                             -------------------------------------------
-// |  7  |  8  |  9  |  10 |  11 |  12 |     |                             |     |  51 |  50 |  49 |  48 |  47 |  46 |
-// ------------------------------------| 13  |                             | 52  |------------------------------------
-// |  14 |  15 |  16 |  17 |  18 |  19 |_____|                             |_____|  58 |  57 |  56 |  55 |  54 |  53 |
+// |  7  |  8  |  9  |  10 |  11 |  12 |     |                             |     |  50 |  49 |  48 |  47 |  46 |  45 |
+// ------------------------------------| 13  |                             | 51  |------------------------------------
+// |  14 |  15 |  16 |  17 |  18 |  19 |_____|                             |____ |  57 |  56 |  55 |  54 |  53 |  52 |
 // ------------------------------------|     |                             |     |------------------------------------
-// |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  __________   __________    |  65 |  64 |  63 |  62 |  61 |  60 |  59 |
-// ------------------------------------------- / 37 / 36 /   \ 75 \ 76 \   -------------------------------------------
-//  | 27 |  28 |  29 |  30 |  31 |       _____/____/____/     \____\____\_____         |  70 |  69 |  68 |  67 | 66 |
-//  ------------------------------      /    /    / 35 /       \ 74 \    \    \        ------------------------------
-//                                     / 32 / 33 /____/         \____\ 72 \ 71 \ 
-//                                    /    /    / 34 /           \ 73 \    \    \
+// |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  __________   __________    | 64  |  63 |  62 |  61 |  60 |  59 |  58 |
+// ------------------------------------------- / 37 / 36 /   \ 74 \ 75 \   -------------------------------------------
+//  | 27 |  28 |  29 |  30 |  31 |       _____/____/____/     \____\____\_____         |  69 |  68 |  67 | 66 | 65  |
+//  ------------------------------      /    /    / 35 /       \ 73 \    \    \        ------------------------------
+//                                     / 32 / 33 /____/         \____\ 71 \ 70 \ 
+//                                    /    /    / 34 /           \ 72 \    \    \
 //                                   /____/____/____/             \____\____\____\
 //
 static uint8_t keyIdMapping[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
@@ -100,13 +100,23 @@ static uint8_t keyIdMapping[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 	//HID_TAB, HID_A, HID_S, HID_D, HID_F, HID_G,	HID_T,
 	//HID_TAB/**TODO change to be Alt **/, HID_Q, HID_W, HID_E, HID_R, HID_T, HID_CAPS_LOCK,
   //C6, C5, C4, C3, C2, C1, C0
-	36, 37, 35, 32, 33, 34, 0,//Row0
+	36, 37, 33, 32, 35, 34, 0,//Row0
 	27, 28, 29, 30, 31, 0, 0,//Row1
 	20, 21, 22, 23, 24, 25, 26,//Row2
 	14, 15, 16, 17, 18, 19, 0,//Row3
 	 7,  8,  9, 10, 11, 12, 13,//Row4
 	0,1, 2, 3,4,5,6//Row5
 	};
+	
+static uint8_t keyIdMappingRight[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
+
+74, 72, 71, 70, 73, 75, 0,//Row0
+65, 66, 67, 68, 69, 0, 0,//Row1
+58, 59, 60, 61, 62, 63, 64,//Row2
+52, 53, 54, 55, 56, 57, 0,//Row3
+45, 46, 47, 48, 49, 50, 51,//Row4
+38, 39, 40, 41, 42, 43, 44,//Row5
+};
 
 //we need a keyboard that is strictly not the keys, but what happens after a key is pressed
 typedef struct layer_manager
@@ -148,7 +158,7 @@ void initKeys(void)
 	tempKey = initStandardKey(HID_ESCAPE, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 	
-
+//0-6
 	//Second Row left hand
 	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
@@ -167,6 +177,7 @@ void initKeys(void)
 	
 	tempKey = initStandardKey(HID_T, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//7-12
 	
 	//Layer Key
 	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
@@ -184,7 +195,8 @@ void initKeys(void)
 		
 	tempKey = initStandardKey(HID_D, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
-		
+	
+	//18	
 	tempKey = initStandardKey(HID_F, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 		
@@ -194,10 +206,10 @@ void initKeys(void)
 	//Row 4 left hand
 	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_SHIFT);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
-		
+		//
 	tempKey = initStandardKey(HID_Z, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
-		
+		//
 	tempKey = initStandardKey(HID_X, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 		
@@ -250,7 +262,133 @@ void initKeys(void)
 	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_CTRL);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 	
-
+	
+	
+	
+	
+	//Right Hand
+	//Row 5 top right
+	tempKey = initStandardKey(HID_UNDERSCORE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_0, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_9, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_8, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_7, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_6, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 4 top right
+	tempKey = initStandardKey(HID_CLOSE_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_P, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_O, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_I, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_U, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Y, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_OPEN_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 right
+	tempKey = initStandardKey(HID_QUOTE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COLON, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_K, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_J, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_H, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 2 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_SLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COMMA, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_M, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_N, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 1 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_UP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 0 Thumb
+	tempKey = initStandardKey(HID_SPACEBAR, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ENTER, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEDOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEUP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
 }
 
 static void initLayerManager(void)
@@ -281,6 +419,9 @@ void initKeyBoard(void)
 	//configure pin PB06 as input
 	uint8_t i = 0;
 	uint8_t j = 0;
+	//clear all data in ram buffer
+	initSalloc();
+
 	//setup data structure
 	initLayerManager();
 	initKeys();
@@ -421,8 +562,9 @@ void initKeyBoard(void)
 			rightKey->columnIO = rightKeyboardObj.columnIOArr[j];
 			rightKey->currentState = false;
 			rightKey->previousState = false;
+			rightKey->keyId = keyIdMappingRight[i][j];
 			rightKey->hidKeyMod = 0;
-			rightKey->hidKey = keyArray[i][j];//   HID_A+j+i;//no HID Key
+			//rightKey->hidKey = keyArray[i][j];//   HID_A+j+i;//no HID Key
 			rightKey->keyJustDown = false;
 			rightKey->keyJustRelease = false;
 			rightKey->specialKey = 0;//for later use
@@ -561,6 +703,10 @@ uint8_t checkKeys(void)
 			}
 			
 			//Right Hand check
+			//right hand items
+			rightKey->previousState = rightKey->currentState;
+			rightKey->currentState = ioport_get_pin_level(rightKey->columnIO);
+
 			if(rightKey->currentState == true && rightKey->previousState == true)
 			{
 				rightKey->keyHoldCount++;
@@ -568,6 +714,7 @@ uint8_t checkKeys(void)
 				if(rightKey->keyHoldCount == 1)
 				{
 					rightKey->keyJustDown = true;
+					handleKeyJustPressed(rightKey);
 				}
 				else
 				{
@@ -581,6 +728,7 @@ uint8_t checkKeys(void)
 				if (rightKey->keyHoldCount != 0 && rightKey->keyJustRelease == false)
 				{
 					rightKey->keyJustRelease = true;
+					handleKeyJustReleased(rightKey);
 								
 				}
 				else

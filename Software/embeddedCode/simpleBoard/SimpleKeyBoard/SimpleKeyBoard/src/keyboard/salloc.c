@@ -6,6 +6,7 @@
  */ 
 
 #include "Salloc.h"
+#include <string.h>
 
 //this is size is compatible with teensy boards
 //#define KEY_MEMORY_SIZE  1024
@@ -13,9 +14,14 @@
 //My board capabilities and plenty to spare
 #define KEY_MEMORY_SIZE  10240
 
-static uint8_t runTimeMemory[KEY_MEMORY_SIZE];
-static uint16_t timeMemoryLength = 0;//current length of memory
-uint8_t * salloc(uint8_t size)
+static volatile uint8_t runTimeMemory[KEY_MEMORY_SIZE];
+static uint32_t timeMemoryLength = 0;//current length of memory
+void initSalloc(void)
+{
+	memset(runTimeMemory, 0, KEY_MEMORY_SIZE);
+	
+}
+uint8_t * salloc(uint32_t size)
 {
 	uint8_t *memPtr;
 	if(timeMemoryLength + size > KEY_MEMORY_SIZE)
