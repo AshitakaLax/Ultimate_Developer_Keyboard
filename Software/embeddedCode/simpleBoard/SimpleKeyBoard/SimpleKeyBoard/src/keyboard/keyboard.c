@@ -123,7 +123,8 @@ typedef struct layer_manager
 {
 	LAYER* layers[MAX_NUMBER_OF_LAYERS];
 	uint8_t numberOfLayers;//the current number of layers on the board
-	KEYBOARD_LAYER currentLayer;	
+	uint8_t currentLayer;
+	KEYBOARD_LAYER currentLayerType;
 }LAYER_MANAGER;
 
 static LAYER_MANAGER boardLayerManager;
@@ -393,7 +394,8 @@ void initKeys(void)
 
 static void initLayerManager(void)
 {
-	boardLayerManager.currentLayer = STANDARD_LAYER;
+	boardLayerManager.currentLayer = 0;
+	boardLayerManager.currentLayerType = STANDARD_LAYER;
 	boardLayerManager.numberOfLayers = 0;
 	//initialize all layers to be 0
 	//change to memset
@@ -551,11 +553,8 @@ void initKeyBoard(void)
 			key->currentState = false;
 			key->previousState = false;
 			key->keyId = keyIdMapping[i][j];
-			key->hidKeyMod = 0;
-			key->hidKey = keyArray[i][j];//   HID_A+j+i;//no HID Key
 			key->keyJustDown = false;
 			key->keyJustRelease = false;
-			key->specialKey = 0;//for later use
 			key->keyHoldCount = 0;
 
 			//right key
@@ -563,11 +562,8 @@ void initKeyBoard(void)
 			rightKey->currentState = false;
 			rightKey->previousState = false;
 			rightKey->keyId = keyIdMappingRight[i][j];
-			rightKey->hidKeyMod = 0;
-			//rightKey->hidKey = keyArray[i][j];//   HID_A+j+i;//no HID Key
 			rightKey->keyJustDown = false;
 			rightKey->keyJustRelease = false;
-			rightKey->specialKey = 0;//for later use
 			rightKey->keyHoldCount = 0;
 			
 			ioport_set_pin_dir(key->columnIO, IOPORT_DIR_INPUT);
@@ -649,6 +645,7 @@ uint8_t checkKeys(void)
 {
 	uint8_t i = 0;
 	uint8_t j = 0;
+	static uint8_t  keySendCounter= 0;
 	for(i=0; i < NUM_OF_KEY_ROWS; i++)
 	{
 		KEY_ROW *row = &keyboardObj.keyRows[i];
@@ -673,7 +670,12 @@ uint8_t checkKeys(void)
 				if(key->keyHoldCount == 1)
 				{
 					key->keyJustDown = true;
-					handleKeyJustPressed(key);
+					if(keySendCounter < 6)
+					{
+					
+						handleKeyJustPressed(key);
+						keySendCounter++;
+					}
 				}
 				else
 				{
@@ -688,7 +690,13 @@ uint8_t checkKeys(void)
 				{
 					key->keyJustRelease = true;
 					//handle the key being released
+					
 					handleKeyJustReleased(key);
+					if(keySendCounter > 0)
+					{
+						
+						keySendCounter--;
+					}
 				}
 				else
 				{
@@ -714,7 +722,13 @@ uint8_t checkKeys(void)
 				if(rightKey->keyHoldCount == 1)
 				{
 					rightKey->keyJustDown = true;
-					handleKeyJustPressed(rightKey);
+					if(keySendCounter < 6)
+					{
+						
+						handleKeyJustPressed(rightKey);
+						keySendCounter++;
+					}
+					
 				}
 				else
 				{
@@ -729,7 +743,11 @@ uint8_t checkKeys(void)
 				{
 					rightKey->keyJustRelease = true;
 					handleKeyJustReleased(rightKey);
-								
+					if(keySendCounter > 0)
+					{
+						
+						keySendCounter--;
+					}
 				}
 				else
 				{
@@ -845,6 +863,7 @@ static void wakeUpKeyboard(void)
 
 static void handleKeyJustPressed(KEY_OBJ *key)
 {
+	uint8_t i = 0;
 	LAYER *layer = boardLayerManager.layers[boardLayerManager.currentLayer];
 	uint8_t keyId = key->keyId;
 	GENERIC_KEY *genericKey = layer->keys[keyId];
@@ -860,12 +879,53 @@ static void handleKeyJustPressed(KEY_OBJ *key)
 		STANDARD_KEY *standardKey = (STANDARD_KEY*) genericKey;
 		udi_hid_kbd_modifier_down(standardKey->modifiers);
 		udi_hid_kbd_down(standardKey->hid);
-
-		
 	}
 	else if(keyType == LAYER_KEY_TYPE)
 	{
-		
+		//depending on the layer the key is, we will switch accordingly
+		LAYER_KEY *layerKey = (LAYER_KEY *) genericKey;
+		//check if it is a layer up or down key
+		//check if there is a layer in that direction. if we reach the max wrap around
+		if(layerKey->layer == LAYER_UP)
+		{
+			//check if we can move the layer up
+			boardLayerManager.currentLayer++;
+			if(boardLayerManager.currentLayer == boardLayerManager.numberOfLayers)
+			{
+				//go to 0 layer
+				boardLayerManager.currentLayer = 0;
+			}
+		}
+		else if(layerKey->layer == LAYER_DOWN)
+		{
+			//check if we can move the layer Down
+			if(boardLayerManager.currentLayer == 0)
+			{
+				//go to the max layer
+				
+				boardLayerManager.currentLayer = boardLayerManager.numberOfLayers-1;
+//				boardLayerManager.currentLayer = boardLayerManager.;
+			}
+			else
+			{
+				boardLayerManager.currentLayer--;
+			}
+		}
+		else
+		{
+			//go through each layer till the layer matches the current layer
+			for(i = 0; i < boardLayerManager.numberOfLayers; i++)
+			{
+				if(boardLayerManager.layers[i]->type == layerKey->type)
+				{
+					//set the current layer
+//					boardLayerManager.currentLayer = 
+				}
+				
+			}
+//			boardLayerManager
+			
+		}
 		
 	}
 	

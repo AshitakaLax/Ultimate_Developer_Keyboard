@@ -23,9 +23,6 @@ typedef struct key_obj
 	bool keyJustRelease;
 	uint32_t keyHoldCount;
 	uint8_t keyId;//this key will map to layer manager
-	uint8_t hidKey;
-	uint8_t hidKeyMod;
-	uint8_t specialKey;
 }KEY_OBJ;
 
 /************************************************************************/
@@ -44,6 +41,8 @@ typedef enum
 	STANDARD_LAYER,//This is the default layer of the keyboard
 	PROGRAMMING_LAYER,//This is a layer for all of the short cuts in programming editors
 	NUMBER_LAYER,//This is a
+	LAYER_UP,//increments the layer up
+	LAYER_DOWN,//increments the layer down
 	SPARE_1_LAYER,//This is a generic layer
 	SPARE_2_LAYER,
 	SPARE_3_LAYER,

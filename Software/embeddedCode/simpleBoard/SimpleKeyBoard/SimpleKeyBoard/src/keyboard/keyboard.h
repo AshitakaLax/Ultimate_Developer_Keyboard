@@ -23,6 +23,7 @@ typedef struct  keyboard_obj
 	struct extint_chan_conf configExtintChanColumns[NUM_OF_KEY_COLUMNS];
 	KEY_ROW keyRows[NUM_OF_KEY_ROWS];
 }KEYBOARD_OBJ;
+
 typedef struct layer
 {
 	//contains an array of pointers to generic keys
