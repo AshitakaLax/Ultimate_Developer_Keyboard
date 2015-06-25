@@ -110,9 +110,6 @@ src/keyboard/keyboard.d src/keyboard/keyboard.o: \
  ../src/ASF/sam0/boards/samd21_xplained_pro/samd21_xplained_pro.h \
  ../src/config/conf_board.h ../src/ASF/common/services/ioport/ioport.h \
  ../src/ASF/common/services/ioport/sam0/ioport.h \
- ../src/ASF/common/services/storage/ctrl_access/ctrl_access.h \
- ../src/config/conf_access.h ../src/ui.h \
- ../src/ASF/common/components/memory/virtual_mem/virtual_mem.h \
  ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/usb/stack_interface/usb_dual.h \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
@@ -135,19 +132,18 @@ src/keyboard/keyboard.d src/keyboard/keyboard.o: \
  ../src/ASF/common/services/usb/class/cdc/usb_protocol_cdc.h \
  ../src/ASF/common/services/usb/class/cdc/device/udi_cdc.h \
  ../src/config/conf_usb.h \
- ../src/ASF/common/services/usb/class/msc/device/udi_msc.h \
+ ../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h \
  ../src/ASF/common/services/usb/usb_protocol.h \
  ../src/ASF/common/services/usb/usb_atmel.h \
- ../src/ASF/common/services/usb/class/msc/usb_protocol_msc.h \
+ ../src/ASF/common/services/usb/class/hid/usb_protocol_hid.h \
+ ../src/ASF/common/services/usb/udc/udc_desc.h \
+ ../src/ASF/common/services/usb/udc/udi.h \
+ ../src/ASF/common/services/usb/udc/udi.h \
+ ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
+ ../src/uart.h ../src/main.h ../src/ui.h \
  ../src/ASF/common/services/usb/udc/udd.h \
  ../src/ASF/common/services/usb/udc/udc_desc.h \
- ../src/ASF/common/services/usb/udc/udi.h \
- ../src/ASF/common/services/usb/udc/udc_desc.h \
- ../src/ASF/common/services/usb/udc/udi.h \
- ../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h \
- ../src/ASF/common/services/usb/class/hid/usb_protocol_hid.h \
- ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
- ../src/uart.h ../src/main.h ../src/ASF/common/services/usb/udc/udc.h \
+ ../src/ASF/common/services/usb/udc/udc.h \
  ../src/ASF/common/services/usb/udc/udd.h \
  ../src/ASF/common/services/usb/class/hid/device/udi_hid.h \
  ../src/keyboard/keyboard.h ../src/keyboard/KeyRow.h \
@@ -381,14 +377,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 
 ../src/ASF/common/services/ioport/sam0/ioport.h:
 
-../src/ASF/common/services/storage/ctrl_access/ctrl_access.h:
-
-../src/config/conf_access.h:
-
-../src/ui.h:
-
-../src/ASF/common/components/memory/virtual_mem/virtual_mem.h:
-
 ../src/ASF/sam0/drivers/port/port.h:
 
 ../src/ASF/sam0/drivers/usb/stack_interface/usb_dual.h:
@@ -433,33 +421,31 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 
 ../src/config/conf_usb.h:
 
-../src/ASF/common/services/usb/class/msc/device/udi_msc.h:
+../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h:
 
 ../src/ASF/common/services/usb/usb_protocol.h:
 
 ../src/ASF/common/services/usb/usb_atmel.h:
 
-../src/ASF/common/services/usb/class/msc/usb_protocol_msc.h:
-
-../src/ASF/common/services/usb/udc/udd.h:
-
-../src/ASF/common/services/usb/udc/udc_desc.h:
-
-../src/ASF/common/services/usb/udc/udi.h:
-
-../src/ASF/common/services/usb/udc/udc_desc.h:
-
-../src/ASF/common/services/usb/udc/udi.h:
-
-../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h:
-
 ../src/ASF/common/services/usb/class/hid/usb_protocol_hid.h:
+
+../src/ASF/common/services/usb/udc/udc_desc.h:
+
+../src/ASF/common/services/usb/udc/udi.h:
+
+../src/ASF/common/services/usb/udc/udi.h:
 
 ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h:
 
 ../src/uart.h:
 
 ../src/main.h:
+
+../src/ui.h:
+
+../src/ASF/common/services/usb/udc/udd.h:
+
+../src/ASF/common/services/usb/udc/udc_desc.h:
 
 ../src/ASF/common/services/usb/udc/udc.h:
 

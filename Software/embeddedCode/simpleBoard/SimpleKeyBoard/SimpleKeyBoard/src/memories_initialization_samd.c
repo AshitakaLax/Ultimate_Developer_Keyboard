@@ -48,7 +48,7 @@
 #include <asf.h>
 /* To get on-board memories configurations */
 #include "conf_board.h" 
-#include "conf_access.h"
+//#include "conf_access.h"
 #include "main.h"
 
 #ifdef CONF_BOARD_SMC_PSRAM

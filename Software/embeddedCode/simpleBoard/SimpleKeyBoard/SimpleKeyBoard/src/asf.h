@@ -72,9 +72,6 @@
 // From module: Interrupt management - SAM implementation
 #include <interrupt.h>
 
-// From module: Memory Control Access Interface
-#include <ctrl_access.h>
-
 // From module: PORT - GPIO Pin Control
 #include <port.h>
 
@@ -130,9 +127,6 @@
 // From module: USB Device HID Mouse (Composite Device)
 #include <udi_hid_mouse.h>
 
-// From module: USB Device MSC (Composite Device)
-#include <udi_msc.h>
-
 // From module: USB Device Stack Core (Common API)
 #include <udc.h>
 #include <udd.h>
@@ -142,11 +136,5 @@
 
 // From module: USB HID Library (Device)
 #include <udi_hid.h>
-
-// From module: USB MSC Protocol
-#include <usb_protocol_msc.h>
-
-// From module: Virtual Memory in RAM
-#include <virtual_mem.h>
 
 #endif // ASF_H

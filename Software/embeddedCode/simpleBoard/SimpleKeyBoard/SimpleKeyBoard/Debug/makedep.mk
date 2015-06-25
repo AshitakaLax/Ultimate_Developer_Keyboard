@@ -4,29 +4,23 @@
 
 src\ASF\common2\services\delay\sam0\systick_counter.c
 
+src\ASF\common\services\usb\class\udi_composite_desc.c
+
+src\ASF\common\services\usb\class\ui.c
+
 src\keyboard\Key.c
 
 src\keyboard\keyboard.c
 
-src\ASF\common\services\usb\class\composite\device\example2\samd21j18a_samd21_xplained_pro\ui.c
-
-src\ASF\common\components\memory\virtual_mem\virtual_mem.c
-
 src\ASF\common\services\sleepmgr\samd\sleepmgr.c
 
-src\ASF\common\services\storage\ctrl_access\ctrl_access.c
-
 src\ASF\common\services\usb\class\cdc\device\udi_cdc.c
-
-src\ASF\common\services\usb\class\composite\device\udi_composite_desc.c
 
 src\ASF\common\services\usb\class\hid\device\kbd\udi_hid_kbd.c
 
 src\ASF\common\services\usb\class\hid\device\mouse\udi_hid_mouse.c
 
 src\ASF\common\services\usb\class\hid\device\udi_hid.c
-
-src\ASF\common\services\usb\class\msc\device\udi_msc.c
 
 src\ASF\common\services\usb\udc\udc.c
 

@@ -282,37 +282,41 @@
  * @{
  */
 //! USB Interfaces descriptor structure
+//	udi_msc_desc_t       udi_msc; 
+
 #define	UDI_COMPOSITE_DESC_T \
 	usb_iad_desc_t       udi_cdc_iad; \
 	udi_cdc_comm_desc_t  udi_cdc_comm; \
 	udi_cdc_data_desc_t  udi_cdc_data; \
-	udi_msc_desc_t       udi_msc; \
 	udi_hid_mouse_desc_t udi_hid_mouse; \
 	udi_hid_kbd_desc_t   udi_hid_kbd
 
 //! USB Interfaces descriptor value for Full Speed
+//	.udi_msc       = UDI_MSC_DESC_FS, 
+
 #define UDI_COMPOSITE_DESC_FS \
 	.udi_cdc_iad   = UDI_CDC_IAD_DESC_0, \
 	.udi_cdc_comm  = UDI_CDC_COMM_DESC_0, \
 	.udi_cdc_data  = UDI_CDC_DATA_DESC_0_FS, \
-	.udi_msc       = UDI_MSC_DESC_FS, \
 	.udi_hid_mouse = UDI_HID_MOUSE_DESC, \
 	.udi_hid_kbd   = UDI_HID_KBD_DESC
 
 //! USB Interfaces descriptor value for High Speed
+//	.udi_msc       = UDI_MSC_DESC_HS, 
+
 #define UDI_COMPOSITE_DESC_HS \
 	.udi_cdc_iad   = UDI_CDC_IAD_DESC_0, \
 	.udi_cdc_comm  = UDI_CDC_COMM_DESC_0, \
 	.udi_cdc_data  = UDI_CDC_DATA_DESC_0_HS, \
-	.udi_msc       = UDI_MSC_DESC_HS, \
 	.udi_hid_mouse = UDI_HID_MOUSE_DESC, \
 	.udi_hid_kbd   = UDI_HID_KBD_DESC
 
 //! USB Interface APIs
+//	&udi_api_msc, 
+
 #define	UDI_COMPOSITE_API \
 	&udi_api_cdc_comm, \
 	&udi_api_cdc_data, \
-	&udi_api_msc, \
 	&udi_api_hid_mouse, \
 	&udi_api_hid_kbd
 //@}
@@ -326,7 +330,7 @@
 
 //! The includes of classes and other headers must be done at the end of this file to avoid compile error
 #include "udi_cdc.h"
-#include "udi_msc.h"
+//#include "udi_msc.h"
 #include "udi_hid_mouse.h"
 #include "udi_hid_kbd.h"
 #include "uart.h"

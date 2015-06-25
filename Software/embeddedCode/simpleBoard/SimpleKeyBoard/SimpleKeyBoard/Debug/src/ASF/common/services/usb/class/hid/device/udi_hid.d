@@ -108,8 +108,6 @@ src/ASF/common/services/usb/class/hid/device/udi_hid.d \
  ../src/ASF/common/services/usb/udc/udi.h \
  ../src/ASF/common/services/usb/udc/udc_desc.h \
  ../src/ASF/common/services/usb/udc/udi.h \
- ../src/ASF/common/services/usb/class/msc/device/udi_msc.h \
- ../src/ASF/common/services/usb/class/msc/usb_protocol_msc.h \
  ../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h \
  ../src/ASF/common/services/usb/class/hid/usb_protocol_hid.h \
  ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
@@ -335,10 +333,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 ../src/ASF/common/services/usb/udc/udc_desc.h:
 
 ../src/ASF/common/services/usb/udc/udi.h:
-
-../src/ASF/common/services/usb/class/msc/device/udi_msc.h:
-
-../src/ASF/common/services/usb/class/msc/usb_protocol_msc.h:
 
 ../src/ASF/common/services/usb/class/hid/device/mouse/udi_hid_mouse.h:
 

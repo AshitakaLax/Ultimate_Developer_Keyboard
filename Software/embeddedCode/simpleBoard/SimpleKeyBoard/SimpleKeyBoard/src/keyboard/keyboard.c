@@ -87,10 +87,30 @@ static uint8_t keyArray2[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 // ------------------------------------------- / 37 / 36 /   \ 74 \ 75 \   -------------------------------------------
 //  | 27 |  28 |  29 |  30 |  31 |       _____/____/____/     \____\____\_____         |  69 |  68 |  67 | 66 | 65  |
 //  ------------------------------      /    /    / 35 /       \ 73 \    \    \        ------------------------------
-//                                     / 32 / 33 /____/         \____\ 71 \ 70 \ 
+//                                     / 32 / 33 /____/         \____\ 71 \ 70 \
 //                                    /    /    / 34 /           \ 72 \    \    \
 //                                   /____/____/____/             \____\____\____\
 //
+
+//     KEY ID TABLE
+// ___________________________________________                             ___________________________________________
+// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |                             |  44 |  43 |  42 |  41 |  40 |  39 |  38 |
+// -------------------------------------------                             -------------------------------------------
+// |  7  |  8  |  9  |  10 |  11 |  12 |     |                             |     |  50 |  49 |  48 |  47 |  46 |  45 |
+// ------------------------------------| 13  |                             | 51  |------------------------------------
+// |  14 |  15 |  16 |  17 |  18 |  19 |_____|                             |____ |  57 |  56 |  55 |  54 |  53 |  52 |
+// ------------------------------------|     |                             |     |------------------------------------
+// |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  __________   __________    | 64  |  63 |  62 |  61 |  60 |  59 |  58 |
+// ------------------------------------------- / 37 / 36 /   \ 74 \ 75 \   -------------------------------------------
+//  | 27 |  28 |  29 |  30 |  31 |       _____/____/____/     \____\____\_____         |  69 |  68 |  67 | 66 | 65  |
+//  ------------------------------      /    /    / 35 /       \ 73 \    \    \        ------------------------------
+//                                     / 32 / 33 /____/         \____\ 71 \ 70 \
+//                                    /    /    / 34 /           \ 72 \    \    \
+//                                   /____/____/____/             \____\____\____\
+//
+
+
+
 static uint8_t keyIdMapping[NUM_OF_KEY_ROWS][NUM_OF_KEY_COLUMNS] = {
 	//HID_SPACEBAR, HID_DELETE, HID_BACKSPACE, HID_SPACEBAR, HID_PAGEDOWN, HID_J,
 	//HID_PAGEUP,
@@ -128,6 +148,280 @@ typedef struct layer_manager
 }LAYER_MANAGER;
 
 static LAYER_MANAGER boardLayerManager;
+
+
+void initLayerOneKey(void)
+{
+	//add 1 layer and it's keys
+	
+	LAYER * temp = initLayer(NUMBER_LAYER);
+	if(!addLayer(temp))
+	{
+		//error couldn't add the layer to the system.
+	}
+	//
+	
+	uint8_t keyIndex = 0;
+	//create the keys and handle them
+	GENERIC_KEY * tempKey;
+
+	//Top Row left hand
+	tempKey = initStandardKey(HID_PLUS, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_1, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_2, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_3, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_4, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_5, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ESCAPE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//0-6
+	//Second Row left hand
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Q, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_W, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_E, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_R, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_T, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//7-12
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 left hand
+	tempKey = initStandardKey(HID_TAB, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_A, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_S, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_D, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//18
+	tempKey = initStandardKey(HID_F, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_G, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 4 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//
+	tempKey = initStandardKey(HID_Z, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//
+	tempKey = initStandardKey(HID_X, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_C, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_V, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_B, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 5 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_TILDE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+	//Thumb keys left hand
+	tempKey = initStandardKey(HID_BACKSPACE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DELETE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_END, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_HOME, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+	
+	
+	
+	//Right Hand
+	//Row 5 top right
+	tempKey = initStandardKey(HID_UNDERSCORE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_0, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_9, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_8, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_7, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_6, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 4 top right
+	tempKey = initStandardKey(HID_CLOSE_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_P, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_O, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_I, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_U, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Y, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_OPEN_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 right
+	tempKey = initStandardKey(HID_QUOTE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COLON, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_K, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_J, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_H, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 2 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_SLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COMMA, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_M, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_N, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 1 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_UP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 0 Thumb
+	tempKey = initStandardKey(HID_SPACEBAR, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ENTER, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEDOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEUP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+		
+}
+
 
 void initKeys(void)
 {
@@ -227,6 +521,270 @@ void initKeys(void)
 	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);
 		
+	//Row 5 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_TILDE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+	//Thumb keys left hand
+	tempKey = initStandardKey(HID_BACKSPACE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DELETE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_END, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_HOME, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	
+	
+	
+	
+	//Right Hand
+	//Row 5 top right
+	tempKey = initStandardKey(HID_UNDERSCORE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_0, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_9, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_8, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_7, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_6, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 4 top right
+	tempKey = initStandardKey(HID_CLOSE_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_P, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_O, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_I, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_U, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Y, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_OPEN_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 right
+	tempKey = initStandardKey(HID_QUOTE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COLON, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_K, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_J, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_H, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 2 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_SLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_COMMA, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_M, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_N, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer button
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 1 right
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_UI);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_RIGHT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_UP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_DOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_LEFT, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 0 Thumb
+	tempKey = initStandardKey(HID_SPACEBAR, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ENTER, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEDOWN, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_PAGEUP, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_ALT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(0, HID_MODIFIER_RIGHT_CTRL);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+}
+
+
+void initDovrakKeys(void)
+{
+	//here we will setup the keys for the specific boards
+	//need an array of pointers
+	uint8_t keyIndex = 0;
+	//create the keys and handle them
+	GENERIC_KEY * tempKey;
+
+	//Top Row left hand
+	tempKey = initStandardKey(HID_PLUS, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_7, HID_MODIFIER_LEFT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_OPEN_BRACKET, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_3, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_4, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_5, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_ESCAPE, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//0-6
+	//Second Row left hand
+	tempKey = initStandardKey(HID_BACKSLASH, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_Q, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_W, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_E, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_R, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_T, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//7-12
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 3 left hand
+	tempKey = initStandardKey(HID_TAB, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_A, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_S, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_D, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//18
+	tempKey = initStandardKey(HID_F, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_G, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Row 4 left hand
+	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_SHIFT);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//
+	tempKey = initStandardKey(HID_Z, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	//
+	tempKey = initStandardKey(HID_X, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_C, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_V, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	tempKey = initStandardKey(HID_B, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
+	//Layer Key
+	tempKey = initStandardKey(HID_L, HID_MODIFIER_NONE);
+	addKey(keyIndex++,tempKey, STANDARD_LAYER);
+	
 	//Row 5 left hand
 	tempKey = initStandardKey(0, HID_MODIFIER_LEFT_UI);
 	addKey(keyIndex++,tempKey, STANDARD_LAYER);

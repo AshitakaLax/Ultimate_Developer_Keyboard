@@ -93,13 +93,13 @@ int main(void)//
 	
 //	ui_process(udd_get_frame_number());
 	
-		if (main_b_msc_enable) {
-			if (!udi_msc_process_trans()) {
-				sleepmgr_enter_sleep();
-			}
-		}else{
+		//if (main_b_msc_enable) {
+			//if (!udi_msc_process_trans()) {
+				//sleepmgr_enter_sleep();
+			//}
+		//}else{
 			sleepmgr_enter_sleep();
-		}
+		//}
 	}
 }
 
